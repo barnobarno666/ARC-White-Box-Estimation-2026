@@ -1,0 +1,86 @@
+"""Sweep gamma and blend weight for Hermite Covariance on the 8-MLP panel."""
+
+from __future__ import annotations
+
+import flopscope as flops
+import flopscope.numpy as fnp
+from whestbench import BaseEstimator
+from whestbench.domain import MLP
+import sys
+
+_TOTAL_SAMPLES = 4_200
+_INV_4PI = fnp.asarray(0.07957747154594767, dtype=fnp.float32)  # 1 / (4 * pi)
+_ZERO = fnp.asarray(0.0, dtype=fnp.float32)
+
+GAMMA = 0.50
+W_COV = 0.75
+
+def _hermite_gain_covariance(mlp: MLP, gamma_val: float) -> fnp.ndarray:
+    width = mlp.width
+    mu = fnp.zeros(width, dtype=fnp.float32)
+    cov = flops.as_symmetric(fnp.eye(width, dtype=fnp.float32), symmetry=(0, 1))
+    rows = []
+    g_tensor = fnp.asarray(gamma_val, dtype=fnp.float32)
+
+    for weight in mlp.weights:
+        w = fnp.asarray(weight, dtype=fnp.float32)
+        mu_pre = w.T @ mu
+        cov_pre = fnp.einsum("ij,ia,jb->ab", cov, w, w)
+        var_pre = fnp.maximum(fnp.diag(cov_pre), fnp.asarray(1e-12, dtype=fnp.float32))
+        sigma_pre = fnp.sqrt(var_pre)
+        alpha = mu_pre / sigma_pre
+        phi = flops.stats.norm.pdf(alpha).astype(fnp.float32)
+        cdf = flops.stats.norm.cdf(alpha).astype(fnp.float32)
+
+        mu = mu_pre * cdf + sigma_pre * phi
+        second = (mu_pre * mu_pre + var_pre) * cdf + mu_pre * sigma_pre * phi
+        var_post = fnp.maximum(second - mu * mu, _ZERO)
+        gain = fnp.where(sigma_pre > fnp.asarray(1e-12, dtype=fnp.float32), cdf, _ZERO)
+
+        cov_linear = fnp.multiply(fnp.outer(gain, gain), cov_pre)
+        inv_sigma = fnp.where(sigma_pre > 1e-12, 1.0 / sigma_pre, _ZERO)
+        rho = fnp.multiply(fnp.outer(inv_sigma, inv_sigma), cov_pre)
+        rho2 = rho * rho
+        sigma_outer = fnp.outer(sigma_pre, sigma_pre)
+        cov_quad = _INV_4PI * rho2 * sigma_outer
+
+        cov = cov_linear + g_tensor * cov_quad
+        fnp.fill_diagonal(cov, var_post)
+        cov = flops.as_symmetric(cov, symmetry=(0, 1))
+        rows.append(mu)
+
+    return fnp.stack(rows, axis=0)
+
+
+def _whitened_antithetic_mc(mlp: MLP) -> fnp.ndarray:
+    width, depth = mlp.width, mlp.depth
+    count = _TOTAL_SAMPLES
+    half = count // 2
+    scale = fnp.asarray(1.0 / count, dtype=fnp.float32)
+    rng = fnp.random.default_rng(mlp.seed)
+
+    x_half = fnp.asarray(rng.standard_normal((half, width)), dtype=fnp.float32)
+    x = fnp.concatenate((x_half, -x_half), axis=0)
+    gram = (x.T @ x) / fnp.asarray(float(count), dtype=fnp.float32)
+    eigenvalues, eigenvectors = fnp.linalg.eigh(gram)
+    eigenvalues = fnp.maximum(eigenvalues, fnp.asarray(1e-6, dtype=fnp.float32))
+    whitener = (eigenvectors * fnp.power(eigenvalues, -0.5)) @ eigenvectors.T
+    first_weight = fnp.asarray(mlp.weights[0], dtype=fnp.float32)
+    activations = fnp.maximum(x @ (whitener @ first_weight), _ZERO)
+
+    rows = [fnp.sum(activations, axis=0) * scale]
+    for layer in range(1, depth):
+        weight = fnp.asarray(mlp.weights[layer], dtype=fnp.float32)
+        activations = fnp.maximum(activations @ weight, _ZERO)
+        rows.append(fnp.sum(activations, axis=0) * scale)
+    return fnp.stack(rows, axis=0)
+
+
+class Estimator(BaseEstimator):
+    def predict(self, mlp: MLP, budget: int) -> fnp.ndarray:
+        _ = budget
+        c = _hermite_gain_covariance(mlp, GAMMA)
+        m = _whitened_antithetic_mc(mlp)
+        w1 = fnp.asarray(W_COV, dtype=fnp.float32)
+        w2 = fnp.asarray(1.0 - W_COV, dtype=fnp.float32)
+        return w1 * c + w2 * m
