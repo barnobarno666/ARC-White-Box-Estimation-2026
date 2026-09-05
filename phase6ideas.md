@@ -8,6 +8,8 @@ Research sketch, 6 September 2026. Updated after Phase 5 was reported complete t
 
 I would give these two directions most of the serious mathematical attention. A different sampler, another scalar calibration, or a more accurate Gaussian covariance formula may improve the current result, but the evidence does not suggest they individually close the gap to the leaders.
 
+**Research priority clarified:** the user's current best leaderboard score is `1.14e-7` (user-reported). A 10% reduction gives `1.026e-7`; even a 50% reduction gives `5.7e-8`. Neither addresses the approximately 33-fold gap to the earlier `3.5e-9` leaderboard snapshot. Phase 6 should prioritize mechanisms with a credible path to an order-of-magnitude improvement and ultimately the full gap. This is a requirement on the mechanism's plausible capacity, not a demand that its first prototype already achieve tenfold improvement. Optimizing the existing blend is deferred; it is not a prerequisite for pursuing a new representation or integration method.
+
 The most useful shift is from “which named method has not been tried?” to **“what information does the current estimator discard, and can we retain the useful part at an affordable cost?”** Many appealing names already appear in Phase 1 negative-result archives. Several also appear in our own earlier plans. Reopening a direction needs a changed mathematical mechanism, not a renamed implementation.
 
 ## What completion of Phase 5 changes
@@ -21,7 +23,7 @@ The most useful shift is from “which named method has not been tried?” to **
 
 The final report's “absolute sampling floor” also overreaches. A variance-over-sample-count calculation describes the specified sampler and its per-sample cost. It cannot rule out a new control, coupling or integration rule that changes that variance–cost product. Likewise, preserving 10% utilization in the unchanged control does not establish that all better methods must stay below 10%.
 
-For research prioritization, this means **more confidence in avoiding the exact failed implementations, not more confidence that the surrounding mathematical families are impossible**. Correctly identifying the missing error channel and establishing the real combination opportunity should precede interpreting either as a closed avenue. This is a clarification of the research questions, not a request to restart the entire Phase 5 sweep.
+For research prioritization, this means **more confidence in avoiding the exact failed implementations, not more confidence that the surrounding mathematical families are impossible**. Identifying the missing error channel remains valuable because it can direct a fundamentally different estimator. Establishing the precise ceiling of the old blend is deferred: an unsupported closure claim does not itself make that investigation worth doing. This is not a request to restart the Phase 5 sweep.
 
 ## The actual gap, and what Phase 5 currently tells us
 
@@ -207,9 +209,9 @@ The distinct possibility is to integrate a switching surface conditionally, incl
 
 **What needs figuring out:** whether those gate clusters have enough collective influence and sufficiently simple conditional laws. There are many boundaries, and deep boundaries are pieces of hyperplanes with additional gate constraints; treating them as unconstrained Gaussian hyperplanes would be wrong. Their abundance undermines the simple “only a few rare kinks matter” story. This remains a lower-priority possibility unless a tractable analytic boundary object can first be identified.
 
-## Idea 6 — Use the geometry of estimator errors, not one blend weight
+## Deferred supporting idea — Use the geometry of estimator errors
 
-**A supporting direction, with less reason to expect a breakthrough on its own.**
+**Deferred until a new mechanism produces a substantial improvement. Not a standalone Phase 6 research priority.**
 
 The recomputed oracle blend shows why fusion should change when a component changes. Beyond that, different output directions might have different analytic bias and sampling variance. An estimator of the form
 
@@ -221,7 +223,7 @@ allows a matrix `A` instead of a scalar sampling weight. If analytic and samplin
 
 The useful version would constrain this rule to a few physically motivated response subspaces. An unconstrained 1024×1024 fit from eight networks is not credible. Previous scalar/per-neuron blends and public cross-output shrinkage failures make generic empirical-Bayes tuning a weak proposal; the changed ingredient would have to be a reliable structural model of the **error covariance**, not just the activation covariance.
 
-P4N-13 does not establish that existing branches have only 3.11% combination headroom. Numerically sound scalar-combination analysis remains an unresolved preliminary question, with limited research cost compared with a new architecture. It would need actual branch residual vectors, a well-scaled quadratic objective, verified optimization and separate held-out predictions. The existing JSON retains aggregates rather than the branch vectors, so it cannot alone supply that corrected calculation. This caveat reopens the measurement, without predicting that repairing it will produce a competitive method.
+P4N-13 does not establish that existing branches have only 3.11% combination headroom, and 10% is not a proven upper bound either. Blending can theoretically yield large gains when errors cancel strongly. For two equal-MSE estimates with normalized error inner product `rho`, their equal blend has MSE `E(1+rho)/2`; a thirtyfold gain would require `rho` about `-0.933`. There is no evidence here for cancellation of that strength among the existing branches. The unresolved optimizer issue is therefore an evidence caveat, not a reason to spend Phase 6 finding a few more percentage points. Fusion becomes relevant again when a genuinely different component changes the error structure.
 
 **What needs figuring out:** whether analytic error and residual sampling error actually occupy sufficiently different directions within each network. A post-hoc oracle fit can price the opportunity, but it cannot identify deployable coefficients. This is most useful after Ideas 1–3 change the estimator, not as the main Phase 6 bet.
 
@@ -248,7 +250,7 @@ It nevertheless explains why “distill a slightly narrower network” is unlike
 These are research questions, not an execution sequence:
 
 - **Which error channel remains after correct high-accuracy interventions?** Mean, variance, mixed cumulants, and their interactions should be distinguished. P4N-03 has no located result despite the report's completion statement. P4N-12's small-sample terminal calculation does not answer it. This uncertainty determines whether a joint-state implementation is addressing the right problem.
-- **What is the true combination opportunity?** A verified optimum and held-out fit of the actual residual vectors would distinguish poor component complementarity from P4N-13's unchanged-initialization result. It would also separate any benefit of rescaling the analytic vector from a new estimator mechanism.
+- **Does the proposed mechanism have enough capacity to matter?** A mechanism-specific idealization should suggest a plausible order-of-magnitude gain or a credible combination of structural gains. A route whose best imaginable outcome is another 5–10% improvement is outside the current research priority, even if it is easy to implement. Precise retuning of the existing blend can wait.
 - **How much of the late-center error is recoverable from a carried joint state?** The relevant target is projected center error and final fusion, after allowing the surrounding calibration to adapt.
 - **Does a correction retain its sign through actual nonlinear propagation?** This separates a useful joint representation from a local fit that merely predicts magnitudes.
 - **Can cancellation be preserved without a large ensemble?** This is the common difficulty behind signed defects, angular-band responses, and boundary corrections.
@@ -265,7 +267,7 @@ Within the eight-MLP verification limit, independent sampler realizations can cl
 | Signed angular-error transport | Public target-free headroom exists beyond simple feature matching. | All cheap observed bridges so far were inadequate. |
 | Internal amplitude/angular state | Changes the representation and conditions on an internally meaningful variable. | Apparent concentration may disappear when examining centered error. |
 | Analytic boundary integration | Directly addresses the nonsmooth part of the integrand. | Conditional gate geometry may be as hard as the original expectation. |
-| Structured error fusion | Can turn a new component into an actual score improvement; even the simpler existing four-branch optimum remains unverified. | Eight networks do not identify a rich error model; likely a supporting gain. |
+| Structured error fusion — deferred | May help incorporate a successful new mechanism later. | No evidence that retuning the existing branches can close the scale gap; not worth a standalone campaign now. |
 
 I would deprioritize more generic Sobol/Hadamard variants, scalar skew/kurtosis sweeps, extra Gaussian quadrature nodes, finite-difference boundary controls, and larger learners on unchanged pooled summaries. Their public and local evidence is already substantial. A certified MUB comparison is still an uncompleted factual question locally, but its expected role is a stronger sampling reference, not an assumed thirtyfold advance.
 
