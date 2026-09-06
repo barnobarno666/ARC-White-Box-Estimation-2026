@@ -16,6 +16,17 @@ import sys
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
+if sys.stdout and hasattr(sys.stdout, "reconfigure"):
+    try:
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+    except Exception:
+        pass
+if sys.stderr and hasattr(sys.stderr, "reconfigure"):
+    try:
+        sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+    except Exception:
+        pass
+
 REPO_ROOT = Path(__file__).resolve().parent.parent
 WORKSPACE_ROOT = REPO_ROOT.parent
 P65_DIR = REPO_ROOT / "research" / "phase6_5"
@@ -936,13 +947,24 @@ def run_stage_p65_10(progress: Dict[str, Any], resume: bool = True) -> str:
     release_dir.mkdir(parents=True, exist_ok=True)
     archive_path = release_dir / "submission_phase65.tar.gz"
 
+    import datetime
+    import os
     import subprocess
+    import tarfile
+
+    val_env = dict(os.environ)
+    val_env["PYTHONIOENCODING"] = "utf-8"
+    val_env["PYTHONUTF8"] = "1"
+
     val_cmd = [
         "uv", "run", "whest", "validate",
         "--estimator", str(final_dest),
     ]
-    val_res = subprocess.run(val_cmd, cwd=str(REPO_ROOT), capture_output=True, text=True)
-    print(f"[P65-10] Validate output: {val_res.stdout.strip()}")
+    val_res = subprocess.run(val_cmd, cwd=str(REPO_ROOT), capture_output=True, text=True, encoding="utf-8", errors="replace", env=val_env)
+    val_out_safe = (val_res.stdout or "").encode("ascii", errors="replace").decode("ascii").strip()
+    print(f"[P65-10] Validate output: {val_out_safe}")
+    if val_res.returncode != 0:
+        raise RuntimeError(f"whest validate failed with code {val_res.returncode}:\n{val_res.stderr}\n{val_res.stdout}")
 
     pkg_cmd = [
         "uv", "run", "whest", "package",
@@ -950,10 +972,38 @@ def run_stage_p65_10(progress: Dict[str, Any], resume: bool = True) -> str:
         "--output", str(archive_path),
         "--yes",
     ]
-    pkg_res = subprocess.run(pkg_cmd, cwd=str(REPO_ROOT), capture_output=True, text=True)
-    print(f"[P65-10] Package output: {pkg_res.stdout.strip()}")
+    pkg_res = subprocess.run(pkg_cmd, cwd=str(REPO_ROOT), capture_output=True, text=True, encoding="utf-8", errors="replace", env=val_env)
+    pkg_out_safe = (pkg_res.stdout or "").encode("ascii", errors="replace").decode("ascii").strip()
+    print(f"[P65-10] Package output: {pkg_out_safe}")
+    if pkg_res.returncode != 0:
+        raise RuntimeError(f"whest package failed with code {pkg_res.returncode}:\n{pkg_res.stderr}\n{pkg_res.stdout}")
+
     if archive_path.exists():
         print(f"[P65-10] Verified archive: {archive_path} ({archive_path.stat().st_size} bytes)")
+
+    # Populate release artifacts required by runbook Section 2
+    finalist_copy = release_dir / "estimator_p65_final.py"
+    finalist_copy.write_text(final_dest.read_text(encoding="utf-8"), encoding="utf-8")
+
+    with tarfile.open(archive_path, "r:gz") as tf:
+        manifest_data = tf.extractfile("manifest.json").read().decode("utf-8")
+        (release_dir / "manifest.json").write_text(manifest_data, encoding="utf-8")
+
+    verification_data = {
+        "timestamp_utc": datetime.datetime.now(datetime.timezone.utc).isoformat(),
+        "finalist_id": finalist_id,
+        "finalist_file": str(final_dest),
+        "finalist_sha256": sha256_file(final_dest),
+        "archive_sha256": sha256_file(archive_path),
+        "archive_size_bytes": archive_path.stat().st_size,
+        "validate_exit_code": val_res.returncode,
+        "validate_stdout": val_res.stdout.strip(),
+        "package_exit_code": pkg_res.returncode,
+        "package_stdout": pkg_res.stdout.strip(),
+        "unrelaxed_metrics": unrelaxed_rec.get("captured_metrics", {}),
+    }
+    (release_dir / "verification.json").write_text(json.dumps(verification_data, indent=2), encoding="utf-8")
+    print(f"[P65-10] Populated release artifacts in {release_dir}")
 
     progress["last_completed"] = "P65-10"
     progress["next_action"] = "COMPLETE"

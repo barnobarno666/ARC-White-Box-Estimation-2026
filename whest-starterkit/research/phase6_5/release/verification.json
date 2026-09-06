@@ -1,0 +1,101 @@
+{
+  "timestamp_utc": "2026-09-06T19:39:59.025713+00:00",
+  "finalist_id": "P65-03c-L10-p10",
+  "finalist_file": "D:\\ALL CODES\\AICROWD COMPETITION\\candidates\\estimator_p65_final.py",
+  "finalist_sha256": "b06d91bc155f19e696c690c2b9956c2ba2426ba142de3c7d6dcf7f078344255e",
+  "archive_sha256": "7ba2dbcb80ecdc2b35255d9b7063959ea46028a12c2c6cc7740efe5c1084d924",
+  "archive_size_bytes": 3739,
+  "validate_exit_code": 0,
+  "validate_stdout": "Validating estimator D:\\ALL CODES\\AICROWD \nCOMPETITION\\candidates\\estimator_p65_final.py\n\u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500 Validation \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n\u2502 Command: validate                                                           \u2502\n\u2502 Status: success                                                             \u2502\n\u2502 \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500 Checks \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u2502\n\u2502 \u2502 \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510                  \u2502 \u2502\n\u2502 \u2502 \u2502 Status \u2502 Check                    \u2502 Detail         \u2502                  \u2502 \u2502\n\u2502 \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524                  \u2502 \u2502\n\u2502 \u2502 \u2502 OK     \u2502 class resolved           \u2502 Estimator      \u2502                  \u2502 \u2502\n\u2502 \u2502 \u2502 OK     \u2502 setup(context) completed \u2502 0.04s (cap 5s) \u2502                  \u2502 \u2502\n\u2502 \u2502 \u2502 OK     \u2502 predict() returned shape \u2502 (2, 4)         \u2502                  \u2502 \u2502\n\u2502 \u2502 \u2502 OK     \u2502 values finite            \u2502 all finite     \u2502                  \u2502 \u2502\n\u2502 \u2502 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518                  \u2502 \u2502\n\u2502 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 \u2502\n\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n\u2713 Validation passed in 369ms\nNext: `whest run --estimator estimator.py --split mini`",
+  "package_exit_code": 0,
+  "package_stdout": "Packaging single file estimator_p65_final.py \u2192 D:\\ALL CODES\\AICROWD \nCOMPETITION\\whest-starterkit\\research\\phase6_5\\release\\submission_phase65.tar.g\nz\n\u26a0 Single-file submission: only estimator_p65_final.py will be submitted. 67 \nitems beside it will NOT be included: estimator_muse_t2e_k3sq.py, \nestimator_p65_02a_struc.py, estimator_p65_02b_k4spec.py, \nestimator_p65_02c_termsplit.py, estimator_p65_02d_combined.py, \nestimator_p65_03a_r045.py, estimator_p65_03a_r055.py, \nestimator_p65_03a_r070.py, and 59 more. Point --estimator at the folder to \npackage the whole directory.\n\u2819 Packaging ----------                               3.7/14.4 kB ? -:--:--\n\u2713 Wrote D:\\ALL CODES\\AICROWD \nCOMPETITION\\whest-starterkit\\research\\phase6_5\\release\\submission_phase65.tar.g\nz in 101ms (3.7 KB)\n\u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500 Packaged Submission \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n\u2502 Command: package                                                            \u2502\n\u2502 Status: success                                                             \u2502\n\u2502 \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500 Artifact \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u2502\n\u2502 \u2502 \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u2502 \u2502\n\u2502 \u2502 \u2502 Path \u2502 D:\\ALL CODES\\AICROWD                                         \u2502 \u2502 \u2502\n\u2502 \u2502 \u2502      \u2502 COMPETITION\\whest-starterkit\\research\\phase6_5\\release\\submi \u2502 \u2502 \u2502\n\u2502 \u2502 \u2502      \u2502 ssion_phase65.tar.gz                                         \u2502 \u2502 \u2502\n\u2502 \u2502 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 \u2502 \u2502\n\u2502 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 \u2502\n\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\nNext: `whest submit D:\\ALL CODES\\AICROWD \nCOMPETITION\\whest-starterkit\\research\\phase6_5\\release\\submission_phase65.tar.g\nz` (or `whest submit --estimator estimator.py`)",
+  "unrelaxed_metrics": {
+    "n_mlps": 8,
+    "mean_raw_final_mse": 3.785377678737387e-08,
+    "mean_adjusted_score": 2.978406594897371e-08,
+    "mean_compute_utilization": 0.7868188718994134,
+    "max_residual_wall_time_s": 1.6429320999050105,
+    "per_mlp": [
+      {
+        "mlp_order": 0,
+        "mlp_name": "logan-fitzgerald",
+        "final_layer_mse": 3.804083733187406e-08,
+        "flops_used": 1730232997214,
+        "compute_utilization": 0.7868188718994134,
+        "score_multiplier": 0.7868188718994134,
+        "adjusted_score": 2.993124871557424e-08,
+        "residual_wall_time_s": 1.5701907999955438
+      },
+      {
+        "mlp_order": 1,
+        "mlp_name": "william-graves",
+        "final_layer_mse": 4.4428524752513686e-08,
+        "flops_used": 1730232997214,
+        "compute_utilization": 0.7868188718994134,
+        "score_multiplier": 0.7868188718994134,
+        "adjusted_score": 3.495720172592798e-08,
+        "residual_wall_time_s": 1.5379370999362436
+      },
+      {
+        "mlp_order": 2,
+        "mlp_name": "raymond-barnes",
+        "final_layer_mse": 4.137456576642231e-08,
+        "flops_used": 1730232997214,
+        "compute_utilization": 0.7868188718994134,
+        "score_multiplier": 0.7868188718994134,
+        "adjusted_score": 3.255428916166449e-08,
+        "residual_wall_time_s": 1.623547699964547
+      },
+      {
+        "mlp_order": 3,
+        "mlp_name": "steven-rice",
+        "final_layer_mse": 3.958375443198818e-08,
+        "flops_used": 1730232997214,
+        "compute_utilization": 0.7868188718994134,
+        "score_multiplier": 0.7868188718994134,
+        "adjusted_score": 3.114524500772034e-08,
+        "residual_wall_time_s": 1.5364266000215139
+      },
+      {
+        "mlp_order": 4,
+        "mlp_name": "sarah-kelley",
+        "final_layer_mse": 3.490376396931944e-08,
+        "flops_used": 1730232997214,
+        "compute_utilization": 0.7868188718994134,
+        "score_multiplier": 0.7868188718994134,
+        "adjusted_score": 2.746294019138331e-08,
+        "residual_wall_time_s": 1.516378700023779
+      },
+      {
+        "mlp_order": 5,
+        "mlp_name": "christopher-morales",
+        "final_layer_mse": 3.252566993245066e-08,
+        "flops_used": 1730232997214,
+        "compute_utilization": 0.7868188718994134,
+        "score_multiplier": 0.7868188718994134,
+        "adjusted_score": 2.5591810924023498e-08,
+        "residual_wall_time_s": 1.6429320999050105
+      },
+      {
+        "mlp_order": 6,
+        "mlp_name": "cheryl-graham",
+        "final_layer_mse": 3.392770447987566e-08,
+        "flops_used": 1730232997214,
+        "compute_utilization": 0.7868188718994134,
+        "score_multiplier": 0.7868188718994134,
+        "adjusted_score": 2.6694958164992438e-08,
+        "residual_wall_time_s": 1.5217590998763626
+      },
+      {
+        "mlp_order": 7,
+        "mlp_name": "renee-park",
+        "final_layer_mse": 3.804539363454701e-08,
+        "flops_used": 1730232997214,
+        "compute_utilization": 0.7868188718994134,
+        "score_multiplier": 0.7868188718994134,
+        "adjusted_score": 2.99348337005034e-08,
+        "residual_wall_time_s": 1.5333495998747821
+      }
+    ]
+  }
+}

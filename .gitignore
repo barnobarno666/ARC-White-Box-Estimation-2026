@@ -1,5 +1,8 @@
 *.json
+!whest-starterkit/research/phase6_5/release/*.json
 api_aicrowd.json
 *.pyc
 *.gz
 *.npz
+*.npy
+
