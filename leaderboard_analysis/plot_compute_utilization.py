@@ -67,6 +67,27 @@ ROWS = [
     (50, "LuDoe", 0.0920966022),
 ]
 
+# Values from the same live leaderboard rows, in the order above.
+ADJUSTED_SCORES = [
+    3e-9, 3e-9, 3.3e-9, 3.4e-9, 3.9e-9, 4.3e-9, 5e-9, 5.4e-9, 5.4e-9,
+    5.7e-9, 5.8e-9, 8e-9, 8.3e-9, 8.7e-9, 9.3e-9, 9.4e-9, 9.6e-9, 1e-8,
+    1.06e-8, 1.06e-8, 1.07e-8, 1.08e-8, 1.11e-8, 1.13e-8, 1.24e-8,
+    1.27e-8, 1.38e-8, 1.45e-8, 1.51e-8, 1.61e-8, 1.79e-8, 1.83e-8,
+    1.84e-8, 1.88e-8, 2.35e-8, 2.65e-8, 2.75e-8, 2.8e-8, 2.85e-8,
+    2.87e-8, 3.25e-8, 3.47e-8, 3.72e-8, 3.74e-8, 3.97e-8, 4.32e-8,
+    4.57e-8, 4.61e-8, 4.97e-8, 6.06e-8,
+]
+
+FINAL_LAYER_MSE = [
+    2.02e-8, 1.97e-8, 2.01e-8, 1.84e-8, 2.05e-8, 2.96e-8, 2.24e-8,
+    2.8e-8, 2.5e-8, 2.13e-8, 4.54e-8, 1.5e-8, 2.73e-8, 2.59e-8, 3.32e-8,
+    1.96e-8, 2.44e-8, 3.57e-8, 2.6e-8, 2.26e-8, 2.98e-8, 3.15e-8, 9.03e-8,
+    3.33e-8, 1.92e-8, 4.27e-8, 2.99e-8, 3.26e-8, 3.49e-8, 3.32e-8, 4.78e-8,
+    2.33e-8, 2.64e-8, 5.34e-8, 3.48e-8, 3.56e-8, 3.78e-8, 4.09e-8, 3.49e-8,
+    3.64e-8, 3.56e-8, 4.18e-8, 3.78e-8, 2.725e-7, 6.18e-8, 1.153e-7,
+    4.63e-8, 4.74e-8, 4.966e-7, 6.057e-7,
+]
+
 OUTDIR = Path(__file__).parent
 
 
@@ -74,8 +95,14 @@ def main() -> None:
     csv_path = OUTDIR / "phase2_compute_utilization_top50.csv"
     with csv_path.open("w", newline="", encoding="utf-8") as handle:
         writer = csv.writer(handle)
-        writer.writerow(["leaderboard_rank", "participant", "compute_utilization_fraction", "compute_utilization_percent"])
-        writer.writerows((rank, name, fraction, fraction * 100) for rank, name, fraction in ROWS)
+        writer.writerow([
+            "leaderboard_rank", "participant", "adjusted_score", "final_layer_mse",
+            "compute_utilization_fraction", "compute_utilization_percent",
+        ])
+        writer.writerows(
+            (rank, name, score, mse, fraction, fraction * 100)
+            for (rank, name, fraction), score, mse in zip(ROWS, ADJUSTED_SCORES, FINAL_LAYER_MSE, strict=True)
+        )
 
     ranks = [rank for rank, _, _ in ROWS]
     names = [name for _, name, _ in ROWS]
@@ -116,6 +143,58 @@ def main() -> None:
     ax.spines[["top", "right"]].set_visible(False)
     ax.legend(loc="upper left", frameon=False)
     fig.savefig(OUTDIR / "phase2_compute_utilization_top50.png", dpi=220, bbox_inches="tight")
+
+    # The requested joint view: position is jointly determined by raw accuracy
+    # (lower MSE is better) and compute use (lower utilization leaves more
+    # score headroom).  A log MSE axis keeps the dense high-performing cluster
+    # readable while retaining the large-MSE outliers.
+    fig, ax = plt.subplots(figsize=(12.5, 8), constrained_layout=True)
+    point_colors = ax.scatter(
+        utilization,
+        FINAL_LAYER_MSE,
+        c=ranks,
+        cmap="viridis_r",
+        s=78,
+        alpha=0.88,
+        edgecolor="white",
+        linewidth=0.7,
+        zorder=2,
+    )
+    ax.scatter(
+        utilization[mine],
+        FINAL_LAYER_MSE[mine],
+        s=150,
+        color="#e41a1c",
+        edgecolor="black",
+        linewidth=1.15,
+        zorder=4,
+        label="You — rank 40",
+    )
+    median_mse = sorted(FINAL_LAYER_MSE)[len(FINAL_LAYER_MSE) // 2 - 1 : len(FINAL_LAYER_MSE) // 2 + 1]
+    median_mse_value = sum(median_mse) / 2
+    ax.axvline(median_value, color="#7c3aed", linestyle=":", linewidth=1.5, zorder=1, label=f"Median utilization: {median_value:.1%}")
+    ax.axhline(median_mse_value, color="#64748b", linestyle="--", linewidth=1.2, zorder=1, label=f"Median MSE: {median_mse_value:.2e}")
+    ax.annotate(
+        "You — rank 40\nMSE: 3.64e-8\nUtilization: 78.68%",
+        xy=(utilization[mine], FINAL_LAYER_MSE[mine]),
+        xytext=(0.53, 7.2e-8),
+        arrowprops={"arrowstyle": "->", "color": "#e41a1c", "lw": 1.5},
+        color="#b91c1c",
+        fontweight="bold",
+        bbox={"boxstyle": "round,pad=0.35", "fc": "#fff1f2", "ec": "#e41a1c", "alpha": 0.96},
+        zorder=5,
+    )
+    ax.set_title("Phase 2 top 50: final-layer MSE versus compute utilization", fontweight="bold", pad=14)
+    ax.set_xlabel("Raw compute utilization, $C_m/B_m$")
+    ax.set_ylabel("Final-layer MSE (lower is better; log scale)")
+    ax.set_xlim(0.04, 1.04)
+    ax.set_yscale("log")
+    ax.xaxis.set_major_formatter(PercentFormatter(1.0))
+    ax.grid(which="both", color="#d1d5db", linewidth=0.7, alpha=0.75, zorder=0)
+    ax.spines[["top", "right"]].set_visible(False)
+    fig.colorbar(point_colors, ax=ax, pad=0.015, label="Leaderboard rank (lower is better)")
+    ax.legend(loc="upper left", frameon=False)
+    fig.savefig(OUTDIR / "phase2_mse_vs_compute_utilization_top50.png", dpi=220, bbox_inches="tight")
 
 
 if __name__ == "__main__":
