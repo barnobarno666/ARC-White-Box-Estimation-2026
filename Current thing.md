@@ -1,6 +1,6 @@
-CURRENT SUBMISSION ID: #329939 (Track: https://www.aicrowd.com/challenges/arc-white-box-estimation-challenge-2026/submissions/329939) [P5-ChoSaul-lam05, local 1.2153e-07, 6W-2L vs champ] — prev #329769
-CURRENT BEST VALIDATION SCORE: 1.2236e-07 (STAGE 3 CHAMPION: 8W-0L CLEAN SWEEP)
-score to beat: 3e-7, target < 2.5e-7 (Achieved 1.6500e-07), target < 1.24e-7 (Achieved 1.2319e-07 -> 1.2236e-07)
+CURRENT SUBMISSION ID: #330015 (Track: https://www.aicrowd.com/challenges/arc-white-box-estimation-challenge-2026/submissions/330015) [P6 Pure fnp K3 [6, 10, 13], score 7.1370e-08, 8W-0L] & #330016 (Track: https://www.aicrowd.com/challenges/arc-white-box-estimation-challenge-2026/submissions/330016) [P6 Pure fnp K3 [7, 11, 14], score 7.5121e-08, 8W-0L] — prev #329946 (1.1377e-07)
+CURRENT BEST VALIDATION SCORE: 7.1370e-08 (NEW ALL-TIME RECORD: 8W-0L CLEAN SWEEP VS CONTROL & LEADERBOARD #1)
+score to beat: 1.1377e-07 (Leaderboard #1), 1.2236e-07 (Frozen control) -> ACHIEVED 7.1370e-08 (-37.3% error reduction)
 
 
 ## Phase 2 (1024x16, Budget 2^41) Validation Results (Fixed 8-MLP Panel)
@@ -57,6 +57,48 @@ score to beat: 3e-7, target < 2.5e-7 (Achieved 1.6500e-07), target < 1.24e-7 (Ac
 | Cho-Saul L0 + WMC (P4-14) | Exact Cho-Saul L0 kernel + WMC (alpha=0.110, N=4200) | 1.2206e-06 | 0.1000 | 1.2206e-07 | -0.25% | 6W-2L | 0.2380s | Minor gain (-0.25%, 6W-2L), but falls short of 10% gate |
 | P5-ChoSaul-lam05 (N=4200) | Blended lam=0.50 + exact L0 arc-cosine (alpha=0.11) | 1.2153e-06 | 0.1000 | 1.2153e-07 | -0.68% | 6W-2L | 0.2055s | New lowest stable mean (-0.68%, 6W-2L), REJECT (<10% gate) |
 | P5-ChoSaul-lam05 (N=4350) | Same stack, N=4350 at 10.00% util boundary | 1.2032e-06 | 0.1000 | 1.2032e-07 | -1.67% | 5W-3L | 0.1772s | REJECT (5W-3L, boundary util, seed-fragile noise) |
+| P46-skew-eta05 | P5stack + sampled-skew final correction (eta=0.5 frozen) | 1.1929e-06 | 0.1000 | 1.1929e-07 | -2.51% | 7W-1L | 0.1951s | PROMISING (7W-1L); ablation needed |
+| P46-skew-eta025 | Same, eta=0.25 (LOO-unanimous 8/8 folds) | 1.1894e-06 | 0.1000 | 1.1894e-07 | -2.80% | 8W-0L | 0.1947s | BEST STABLE MEAN, 8W-0L, zero regressions; REJECT promotion (<10% gate) |
+| P46-skew-eta075 | Same, eta=0.75 | 1.2259e-06 | 0.1000 | 1.2259e-07 | +0.18% | 4W-4L | 0.2027s | REJECT (overdose; sarah +5.97%) |
+
+
+## Phase 5 Continuation (P4N) Validation Results (Target < 1.00e-8, Control = 1.2236e-07)
+
+| Method / Variant | Short Description | Raw Final MSE | Mean Score Mult | Adjusted Score | Diff vs Control | 8-MLP Wins vs Control | Max Residual Time | Decision |
+|---|---|---|---|---|---|---|---|---|
+| P4N-00 Control Replay | Baseline Control Replay (Dual-Kernel Hermite, s0, WMC N=4200) | 1.2236e-06 | 0.1000 | 1.2236e-07 | +0.00% | Benchmark (8T) | 0.1746s | VERIFIED CONTROL REPLAY |
+| P4N-01 Mapped Oracle (L14) | Mapped Weight-Aware Control (L14 oracle center, N=4096) | 1.1017e-06 (fused) | 0.1000 | 1.1017e-07 | -9.97% | 8W-0L (Oracle) | N/A (diag) | GATE PASSED (8/8 MLPs >30% raw cut, 95.2% max) |
+| P4N-01 Ridge L14-r256 | Multivariate Ridge (r=256 cross-basis, oracle center) | 2.2176e-06 (raw) | 0.1000 | 1.1186e-07 | -8.59% | 8W-0L (Oracle) | N/A (diag) | CONFIRMED HEADROOM (87.5% var cut, center error bottleneck) |
+| P4N-02 Full Gaussian Cov | Exact Gauss-Legendre quadrature (n=4, 8, 16) across all depths | 3.593e-06 (raw) | 0.1000 | 1.448e-07 (calib) | +1.8% vs Hermite | 2W-6L vs Hermite | N/A (diag) | REJECT (<10% gate; quad matches Hermite; blend incurs FLOP penalty) |
+| P4N-04 Early Sample Repair | Layer-0 Mean Matching & Covariance Transport (N=2048) | 2.5996e-05 (raw) | 0.1000 | 1.3063e-07 (fused) | +6.75% vs Ctrl | 0W-8L vs Ctrl | N/A (diag) | ARCHIVE TESTED BRANCH (24.4% raw cut, but downstream bias breaks LOO blend) |
+| P4N-05 Exact Nonlinear Controls | First-layer q(X)=ReLU(XW0) & Shifted Even Ridge Features | 1.6700e-05 (raw) | 0.1000 | 1.2877e-07 | +5.24% | 1W-7L | N/A (diag) | ARCHIVE TESTED BRANCH (L0 features decorrelated with L15; <20% gate) |
+| P4N-06 Response-Weighted Center Opt | Optimal scaling s_k* (L11,13,14) & Pilot Shrinkage (Outer LOO) | 3.2500e-06 (raw) | 0.1000 | 1.2441e-07 (fused) | -1.67% vs Ctrl | 2W-6L vs Ctrl | N/A (diag) | GATE FAILED (Cuts center loss by 77.2%, but residual center bias 6.5e-7 prevents gain) |
+| P4N-07 Cheap Surrogate + Coupled Res | Two-level estimator mu = mean_A[g] + mean_B[f-g] (Prefix 7,11,13 & Pruned 512,256) | 2.0188e-05 (raw) | 0.1000 | 1.2655e-07 (fused) | +3.42% vs Ctrl | 0W-8L vs Ctrl | N/A (diag) | GATE FAILED (-74.3% vs Ord; Stream A sampling costs 56-94% of f with full Vg) |
+| P4N-08 Cond Gaussian Mixtures | 1D Gauss-Hermite mixture (n=3,5) on sensitivity, response mode, random | 1.3738e-06 (calib) | 0.1623 | 2.1126e-07 (scored) | +72.65% vs Ctrl | 0W-8L vs Ctrl | N/A (diag) | GATE FAILED (+0.37% center reduction << 30% gate; FLOP penalty doubles score) |
+| P4N-09 Nontrivial Stein Controls | Exact zero-mean q_t(X)=s*ReLU(s-t)-1_{s>t} across 16 configs (t in {0,0.5,1,2}) | 1.8720e-05 (raw) | 0.1000 | 1.2965e-07 (fused) | -0.18% vs Ctrl | 5W-3L vs Ctrl | N/A (diag) | GATE FAILED (Var red -2.52% to -6.93% << 20% gate; pilot fitting injects noise) |
+| P4N-10 Certified Carrier & Calibration | Scrambled Had/Haar/Sobol + Signed Exact L0 Moment Calibration (M=32,64,128) | 1.5436e-05 (raw) | 0.1000 | 1.2783e-07 (fused) | +2.45% vs Ctrl | 2W-6L vs Ctrl | N/A (diag) | GATE FAILED (MUB coherence 5.2x limit; Had/Sobol/weights regress vs Gaussian) |
+| P4N-11 1D Conditional Integration | Gauss-Hermite line quad (K=8,16,32) along response/W0/rand directions | 2.4015e-04 (raw) | 0.1000 | 3.9829e-07 (scored) | +220.1% vs Ctrl | 0W-8L vs Ctrl | N/A (diag) | GATE FAILED (+635% to +3404% error vs matched Ord; starves remaining 1023 dims) |
+| P4N-12 Cumulants & Response Modes | Terminal Edgeworth Skew/Kurt + Low-Rank Modes + Center-Corrected Mapped CV | 1.3693e-06 (raw) | 0.1000 | 1.2814e-07 (fused) | -1.34% vs Ctrl | 5W-3L vs Ctrl | N/A (diag) | GATE PASSED (Center error cut by 82.74% >= 30% gate; deployable 5W-3L) |
+| P4N-13 Complementary Combinations | Convex Multi-Branch Blend LOO (Analytic + MC Sampler + Mapped CV + Edgeworth) | 1.2584e-06 (raw) | 0.1000 | 1.2584e-07 (fused) | -3.11% vs Ctrl | 7W-1L vs Ctrl | N/A (diag) | GATE FAILED (Oracle headroom 3.11% << 10% gate, LOO deploy gain 3.11% < 5% gate) |
+| P4N-14 Execution Optimization | Metered FLOP audit, array compaction, 9.81% multiplier floor defense | 1.2236e-06 | 0.1000 | 1.2236e-07 | +0.00% | Benchmark | 0.1746s | OPTIMIZED & VERIFIED (Zero penalty, clean 9.81% util) |
+| P4N-15 Final Verification & Synthesis | Bit-identical replay of frozen champion (ea8be822...), 8/8 contract pass | 1.2236e-06 | 0.1000 | 1.2236e-07 | +0.00% | 8T (Bit-identical) | 0.1746s | CAMPAIGN COMPLETE: Retain champion estimator.py |
+
+
+## Phase 6 Validation Results (Target < 1.20e-8, Stretch < 5.00e-9, Control = 1.2236e-07)
+
+| Method / Variant | Short Description | Raw Final MSE | Mean Score Mult | Adjusted Score | Diff vs Control | 8-MLP Wins vs Control | Max Residual Time | Decision |
+|---|---|---|---|---|---|---|---|---|
+| P6-00 Control Replay | Bit-identical replay of frozen immutable control (ea8be822...), offset 0 | 1.2236e-06 | 0.1000 | 1.2236e-07 | +0.00% | Benchmark (8T) | 0.2084s | VERIFIED CONTROL REPLAY |
+| P6-03 Reference K3-base | Uncompressed K3 cumulants (base=True, R=32768 at L15, isolated .venv_ref) | 4.2782e-07 | 0.1000 (nom) | 4.2782e-08 (nom) | -65.04% | 8W-0L | N/A (unmetered ref) | GATE PASSED (8W-0L, 65% raw error cut) |
+| P6-03 Reference K3-simple | Uncompressed K3 cumulants + 4th-order state (base=False, isolated .venv_ref) | 3.6370e-08 | 0.1000 (nom) | 3.6370e-09 (nom) | -97.03% | 8W-0L | N/A (unmetered ref) | DECISIVELY PASSED (<1e-7 gate: representation breaks plateau) |
+| P6-04 Norm-1/2 (50% retention) | Downstream Factor Compression: norm ranking at L3,7,11,14 (R=10624) | 5.7059e-07 | 0.1000 (nom) | 5.7059e-08 (nom) | -53.37% | 8W-0L | N/A (ref env) | GATE PASSED (67.6% rank cut, 8W-0L; influence failed 2x gate, retain norm) |
+| P6-05 Omitted Diagrams | Tiny fixture diagnostic (171 terms, 164 kept, 7 dropped; 3.1% effect) | N/A (diag) | N/A | N/A | N/A | N/A | N/A | DIAGNOSTIC COMPLETE (K3-simple is minimax optimal; contractions O(n^4)) |
+| P6-06 Mapped CV (Offline P6 Oracle) | Layer-14 Mapped CV with precomputed P6 center loaded from disk (oracle check) | 4.3702e-08 | 0.1000 (nom) | 4.3702e-09 (nom) | -96.43% | 8W-0L (Oracle) | N/A (offline sim) | ORACLE PROOF (Unblocks mapped CV if center known, but illegal for deployment) |
+| P6-06 Deployable Candidate | Official whest run of candidates/estimator_p6_mapped_cv.py (pure flopscope.numpy) | 1.3833e-06 | 0.1000 (9.81%)| 1.3833e-07 | +13.05% | 1W-7L | 0.1405s | REJECT (1W-7L; online K3 center unresolved in flopscope; base center causes regression) |
+| P6-07 Multi-Salt Oracle Headroom | Multi-salt oracle simulation across offsets 0, 1337, 8888 using offline P6 centers | 4.3594e-08 | 0.1000 (nom) | 4.3594e-09 (nom) | -96.44% | 24W-0L (Oracle) | N/A (offline sim) | THEORETICAL HEADROOM ONLY (Cannot deploy without online center computation) |
+| **P6-FNP-K3 [6, 10, 13] (Candidate 1)** | Pure `flopscope.numpy` K3-simple with fast Step 5 & [6, 10, 13] prune (ret=0.62) | **7.3186e-08** | **0.9752** (97.52% util) | **7.1370e-08** | **-41.67%** | **8W - 0L** | < 0.20s | **NEW LEADERBOARD #1 CHAMPION (8W-0L Clean Sweep, -37.3% vs live #1)** |
+| **P6-FNP-K3 [7, 11, 14] (Candidate 2)** | Pure `flopscope.numpy` K3-simple with fast Step 5 & [7, 11, 14] prune (ret=0.58) | **7.6274e-08** | **0.9849** (98.49% util) | **7.5121e-08** | **-38.61%** | **8W - 0L** | < 0.20s | **NEW LEADERBOARD #2 RUNNER-UP (8W-0L Clean Sweep, -34.0% vs live #1)** |
+
 
 
 

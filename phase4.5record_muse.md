@@ -243,4 +243,102 @@ results. Format mirrors `PHASE4_RECORD.md`.
    - A lawful low-dimensional selector recovering $\ge 20\%$ of a large oracle (all measured oracles: $0.5$–$6\%$, and selectors recover $\approx 0\%$).
    - Absent one of these — genuinely new mathematics, not stacking — further tuning in this family is scientifically closed. Recommended next bets (untested, high-risk): offline-universal shipped-table priors trained on 90+ held-aside public MLPs (legal data-file path), or a distilled tiny shipped corrector applied via flopscope ops.
 
+### Experiment P4.6-03a: Lane E Flagship Smoke — Final-Layer-Only Kurtosis
+* **Date/time**: 2026-09-05
+* **Lane and method family**: Lane E (TAP/Onsager program, first concrete mechanism)
+* **Hypothesis**: P4-12 did NOT kill cumulant corrections: it used a fabricated schedule $\gamma_2(l)=0.0042\,l$, injected recurrently at all 16 layers (16x compounding) into an inconsistent variance. The honest version — measured universal $\gamma_2$ applied ONCE at the final layer — cuts cov-branch MSE.
+* **Mathematical mechanism**: $\mu_{15} = \mu^{G}_{15} + \sigma_{\rm pre}(\gamma_2/24)(a^2-1)\phi(a)$ (Edgeworth $\kappa_4$ term re-derived by direct Hermite integration; also derived skew term $-\sigma\gamma_1 a\phi(a)/6$, unused since measured mean skew $\approx 0$). Numpy offline, $s_0$ fixed, 2 smoke MLPs, bases lam=0.20 and lam=0.50.
+* **Candidate file and SHA-256**: `scripts/diag_p46_laneE_smoke.py` (offline diagnostic)
+* **Control file and SHA-256**: `estimator.py` (`ea8be822...`)
+* **Results Measured** (cov-branch MSE, both bases):
+  - logan: control `1.5498e-06`; g2=+0.03 +1.51%; +0.057 +3.46%; +0.10 +7.74%; g2=-0.057 -0.94%; -0.10 +0.01%.
+  - william: control `1.4770e-06`; +0.03 +0.72%; +0.057 +2.04%; +0.10 +5.48%; -0.057 +0.82%; -0.10 +3.34%.
+* **Evidence label**: `[measured]`
+* **Interpretation**: Positive (theoretically-correct-sign) doses hurt MONOTONICALLY on both MLPs and both branches; negative doses split 1W-1L (fitting noise). The 4th-order Edgeworth mean-shift family is falsified as a mechanism, not a dose — per-neuron tracking of the same family cannot help.
+* **Decision**: KILL fixed-kurtosis correction. Grant exactly one last stand (P4.6-03b, the untested skew cumulant) before closing Lane E's cumulant wing.
+* **Exact gate applied**: User smoke gate (both MLPs + mean $\ge 3\%$); failed (all-positive hurt).
+
+### Experiment P4.6-03b: Lane E Last Stand — Sampled-Skewness Smoke
+* **Date/time**: 2026-09-05
+* **Lane and method family**: Lane E cumulant wing (skewness, the one untested cumulant)
+* **Hypothesis**: Per-neuron preactivation skewness is real scatter (P4-06: std 0.11 across neurons vs sampling SE $\approx 0.038$), and the derived skew correction $-\sigma g_1 a\phi(a)/6$ with $g_1$ from the MC branch's OWN whitened samples (zero extra sampling FLOPs, lawful) cuts cov-branch MSE at damped dose.
+* **Mathematical mechanism**: $g_1$ = bias-aware sample skewness of final preactivations $Z_{15}$ ($N=4200$ whitened, same draws as MC branch); $\mu_{15} = \mu^G_{15} - \eta\,\sigma_{\rm pre}\,g_1\,a\,\phi(a)/6$, $\eta \in \{0.5, 1.0\}$.
+* **Candidate file and SHA-256**: `scripts/diag_p46_laneE_skew.py` (offline diagnostic)
+* **Control file and SHA-256**: `estimator.py` (`ea8be822...`)
+* **Results Measured**:
+  - logan: control `1.5498e-06`; skew_std=0.1140; eta=0.5 `1.4974e-06` (-3.38%); eta=1.0 +2.59%.
+  - william: control `1.4770e-06`; skew_std=0.1076; eta=0.5 `1.4247e-06` (-3.54%); eta=1.0 +3.44%.
+  - skew_mean $\approx +0.003$ both (matches P4-06 mean~0); full dose overshoots (noise + truncation pushback), half dose lands — both MLPs identically.
+* **Evidence label**: `[measured]`
+* **Interpretation**: PASS of the aggressive smoke gate (both win, mean -3.46% $\ge$ 3%). Coherent dose-response (0.5 helps both / 1.0 hurts both) signals mechanism, not noise. ETA=0.5 FROZEN a priori for deployable.
+* **Decision**: CONTINUE to deployable full-panel (P4.6-03c). First Lane E signal with a pulse.
+* **Exact gate applied**: User smoke gate; passed.
+
+### Experiment P4.6-03c: Lane E Deployable — P5 Stack + Sampled-Skew (eta=0.5)
+* **Date/time**: 2026-09-05
+* **Lane and method family**: Lane E deployable (P5-05 stack + skew correction)
+* **Hypothesis**: The 03b cov-branch cut (-3.5%) survives fusion with the MC branch (A4-correlation lesson: must measure, not assume) into a multi-% fused gain at unchanged compute.
+* **Mathematical mechanism**: `candidates/estimator_p46_laneE_skew.py`: lam=0.50 + exact Cho-Saul L0 + $s_0$ + sampled-skew final correction ($\eta=0.5$ frozen) + WMC blend ($\alpha=0.110$, $N=4200$). Added cost O(N·n) reductions only.
+* **Candidate file and SHA-256**: `candidates/estimator_p46_laneE_skew.py` (`a1bf6a0a73a4ba126d9c2140973a2da3640c879514ac149e22f4b01a8f73fe57`)
+* **Control file and SHA-256**: `estimator.py` (`ea8be822...`)
+* **Parameters frozen before run**: $\lambda=0.50$, exact-L0 on, $\eta=0.5$ (smoke-frozen), $s_0=0.998319$, $\alpha=0.110$, $N=4200$.
+* **Control adjusted score**: `1.223643e-07`
+* **Candidate adjusted score**: `1.192905e-07`
+* **Relative adjusted improvement**: `-2.51\%`
+* **Raw final-layer MSE**: `1.192905e-06`
+* **Compute utilization and multiplier**: `9.76\%` (unchanged — extra ops unmeasurable), Multiplier: `0.1000`
+* **Max residual wall time**: `0.1951s`
+* **Failures**: 0
+* **Per-MLP Scores**: 7W-1L (wins -0.77% to -4.38%; sole loss sarah-kelley +1.57%). Full table in run output.
+* **Evidence label**: `[measured]`
+* **Interpretation**: Strongest fused gain of the entire Phase 4/4.5/4.6 program; correction/MC-branch correlation costs only ~1% of the cov-branch gain (fusion-friendly, unlike A4 controls). Still $4\times$ short of the 10% interim gate.
+* **Decision**: CONTINUE for exactly one principled extension (eta ablation + LOO), then switch lanes per plan.
+* **Exact gate applied**: Plan decision tree (2.51% in the 3–10% bracket modulo epsilon, 7W-1L, coherent mechanism).
+
+### Experiment P4.6-03d: Eta Ablation {0, 0.25, 0.5, 0.75} + LOO Selection
+* **Date/time**: 2026-09-05
+* **Lane and method family**: Lane E dose-response mapping (the one allowed extension)
+* **Hypothesis**: The smoke-tested $\eta=0.5$ is near-optimal; mapping {0, 0.25, 0.5, 0.75} on the 8-panel with LOO selection confirms the dose generalizes rather than smoke-overfits.
+* **Mathematical mechanism**: Same deployable with `_ETA_SKEW` ∈ {0.25, 0.75} (`estimator_p46_laneE_skew_e025.py` `cb42829e...`, `estimator_p46_laneE_skew_e075.py` `149c92b8...`); $\eta=0$ ≡ P5-05 (`93ee3c28...`).
+* **Results Measured**:
+  - eta=0.00: `1.215291e-07` (-0.68%, 6W-2L).
+  - eta=0.25: `1.189367e-07` (**-2.80\%, 8W-0L**, worst -0.29% sarah-kelley — ZERO regressions; resid 0.1947s; reproduced bit-identically on rerun).
+  - eta=0.50: `1.192905e-07` (-2.51%, 7W-1L, worst +1.57%).
+  - eta=0.75: `1.225902e-07` (+0.18%, 4W-4L, worst +5.97% sarah-kelley).
+  - Clean UNIMODAL dose-response peaking near 0.25; sarah-kelley monotonic canary (+0.41 → -0.29 → +1.57 → +5.97).
+  - LOO over {0, 0.25, 0.5, 0.75}: **8/8 folds pick eta=0.25** (including folds holding out the smoke MLPs logan/william — circularity mitigated); LOO mean = refit mean = `1.189367e-07`. Unanimous agreement.
+* **Evidence label**: `[measured]` (LOO `[derived]` from measured tables)
+* **Interpretation**: Dose confirmed generalizing, not smoke-overfit. First 8W-0L vs the current champ in the program with zero regressed MLPs. New best stable mean by far — but still $3.6\times$ short of the 10% gate and $\sim 12\times$ short of e-8.
+* **Decision**: RECORD eta=0.25 file as best-mean variant; REJECT promotion (2.80% << 10%). Lane E cumulant wing now fully mapped — SWITCH LANES per plan (Lane F next).
+* **Submission (2026-09-05, explicit user approval)**: validated 86ms, packaged `submission-20260905-165613.tar.gz` (2.3 KB), submitted as **#329946** (`.../submissions/329946`). LB score pending — watch grading before any champion claim.
+* **Exact gate applied**: Promotion gate (mean $\ge 10\%$); plan lane-switch rule (extension consumed).
+
+---
+
+## Updated Synthesis (appends §4–5 of prior synthesis)
+
+6. **Lane E outcome: mechanism confirmed, magnitude insufficient.**
+   - Kurtosis wing (both signs, both branches, 2 MLPs): dead — positive doses hurt monotonically, negative split.
+   - Skewness wing: REAL signal (scatter 0.11 » noise 0.038), dose-response unimodal peaking at $\eta=0.25$, LOO-unanimous, 8W-0L, util unchanged at 9.76%.
+   - Best stable mean overall: `1.189367e-07` (-2.80%). The e-8 gap closed from $34.6\%$ to $32.7\%$ remaining — progress, not escape.
+   - Remaining Lane E idea (full TAP reaction derivation beyond Edgeworth) is now heavily disfavored: the exact cumulant family it would extend just measured out at single-digit %. Deprioritize unless derivation shows an effect OUTSIDE the cumulant hierarchy.
+7. **Next per plan: Lane F (shrunk moment-restart, one fixed-design eval), then Lane G anatomy.** The stacked winner (skew eta=0.25 file) becomes the new deployable base for all downstream lanes.
+
+### Experiment P4.6-04: Co-Skewness Variance-Path Smoke (A: 1D var corrections; B-lite: cross T21/T12)
+* **Date/time**: 2026-09-05
+* **Lane and method family**: Lane E2 / joint non-Gaussianity (the one untested half of $A$)
+* **Hypothesis**: Final means use only means, but covariance matters via diag(variances) → next-layer means. 1D Edgeworth corrections to var_post (A, recurrent) and factorized bivariate co-skewness to off-diagonals at layers 12–14 (B-lite, T21/T12 terms with $K_{21}(i,j)=\sum_a W_{ai}^2W_{aj}s_a$) cut final-mean MSE.
+* **Mathematical mechanism**: (A) $E[\mathrm{ReLU}^2] \approx \mathrm{second}_G + s^2[g_1\phi/3 - g_{2,\mathrm{lin}}a\phi/12]$, $g_1$ sampled preactivation skew per layer, $g_{2,\mathrm{lin}} = 0.057\,l/15$ (measured endpoints); (B) $\Delta E_{ij} = -[K_{21}T_{21} + K_{12}T_{12}]/2$ with closed-form $T_{21}$ (verified vs finite-difference reference after fixing TWO sign bugs — conditional minus and chain-rule plus — caught by the in-script assert).
+* **Candidate file and SHA-256**: `scripts/diag_p46_coskw_smoke.py` (offline diagnostic; numpy)
+* **Control file and SHA-256**: eta025-base equivalent (lam=0.50 + final skew $\eta=0.25$), s0 fixed
+* **Results Measured** (cov-branch final-mean MSE, 2 MLPs):
+  - (A): logan base `1.5030e-06`, A@0.5 +1.11%, A@1.0 +4.33%; william base `1.4248e-06`, A@0.5 -0.45%, A@1.0 -0.45% (dose-flat → incidental). Mean +0.33%. FAIL gate.
+  - (B-lite): K-identity assert (diag $K_{21}$ vs sampled marginal $\kappa_3$) median rel err **0.99** both MLPs (noise floor ~0.2) — factorized third cumulants are pure noise: post-activations are too dependent for independence-factorization (the cumulant hierarchy does not close at affordable order).
+  - Debugging footnote: first run exploded (+1e8%) from feeding POST-activation skew into a PREACTIVATION formula; fixed by tracking preactivation moments. Second saga: two sign errors in T21 derivation, both caught by the verification assert before any conclusion was drawn.
+* **Evidence label**: `[measured]`
+* **Interpretation**: (A) 1W-1L, mean-harmful — the variance channel at this magnitude does not move final means. (B) structurally falsified — no affordable third-order state exists. The joint-cumulant road ends here (full-tensor tracking is $O(n^3)$ STATE/layer, budget-impossible).
+* **Decision**: KILL P4.6-04 entirely (A measured-dead, B falsified, T30/T03 moot). Lane E fully closed including E2.
+* **Exact gate applied**: User smoke gate (both + mean $\ge 3\%$); failed on both wings.
+* **Next experiment justified**: Lane F shrunk moment-restart (P4.6-05) — fully designed, cheap, binary, tests the manifold story.
+
 (End of file)

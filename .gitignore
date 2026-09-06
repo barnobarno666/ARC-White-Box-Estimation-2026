@@ -1,2 +1,5 @@
 *.json
 api_aicrowd.json
+*.pyc
+*.gz
+*.npz
