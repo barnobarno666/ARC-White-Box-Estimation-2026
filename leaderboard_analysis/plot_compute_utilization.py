@@ -234,6 +234,31 @@ def main() -> None:
         path_effects=[path_effects.withStroke(linewidth=1.2, foreground="#111827")],
     )
     ax.set_title("Phase 2 top 50: final-layer MSE versus compute utilization\nBubble text = leaderboard rank", fontweight="bold", pad=14)
+
+    # Dark presentation treatment for the final rank-labelled plot.
+    fig.patch.set_facecolor("#0b1020")
+    ax.set_facecolor("#111827")
+    ax.title.set_color("#f8fafc")
+    ax.xaxis.label.set_color("#e5e7eb")
+    ax.yaxis.label.set_color("#e5e7eb")
+    ax.tick_params(colors="#d1d5db", which="both")
+    for spine in ax.spines.values():
+        spine.set_color("#94a3b8")
+    for gridline in ax.get_xgridlines() + ax.get_ygridlines():
+        gridline.set_color("#475569")
+        gridline.set_alpha(0.5)
+    legend = ax.get_legend()
+    if legend is not None:
+        legend.get_frame().set_facecolor("#111827")
+        legend.get_frame().set_edgecolor("#475569")
+        for text in legend.get_texts():
+            text.set_color("#f8fafc")
+    colorbar = point_colors.colorbar
+    if colorbar is not None:
+        colorbar.ax.set_facecolor("#111827")
+        colorbar.ax.tick_params(colors="#d1d5db")
+        colorbar.set_label("Leaderboard rank (lower is better)", color="#e5e7eb")
+        colorbar.outline.set_edgecolor("#94a3b8")
     fig.savefig(OUTDIR / "phase2_mse_vs_compute_utilization_top50_rank_labeled.png", dpi=220, bbox_inches="tight")
 
 
