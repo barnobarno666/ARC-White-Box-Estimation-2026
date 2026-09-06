@@ -1,0 +1,67 @@
+{
+  "candidate_sha256": "8498085d5b90646c6d65ce23087b2e9331980a77cb44bfa6d762341f68dd05ac",
+  "diagnostic_only_residual_gate_disabled": true,
+  "raw_mse": 7.320334471927481e-08,
+  "projected_adjusted_score": 4.6654619132550436e-08,
+  "utilization": 0.6373290634664954,
+  "max_residual_s": 1.5647880002798047,
+  "max_wall_s": 17.270526199994492,
+  "per_mlp": [
+    {
+      "mlp_name": "logan-fitzgerald",
+      "final_layer_mse": 8.475084456449622e-08,
+      "adjusted_final_layer_score": 5.40141763942849e-08,
+      "flops_used": 1401501432002,
+      "residual_wall_time_s": 1.2560371999934432
+    },
+    {
+      "mlp_name": "william-graves",
+      "final_layer_mse": 7.033497695374535e-08,
+      "adjusted_final_layer_score": 4.4826524990868064e-08,
+      "flops_used": 1401501432002,
+      "residual_wall_time_s": 1.2620840999588836
+    },
+    {
+      "mlp_name": "raymond-barnes",
+      "final_layer_mse": 7.612072039364648e-08,
+      "adjusted_final_layer_score": 4.851394743887767e-08,
+      "flops_used": 1401501432002,
+      "residual_wall_time_s": 1.3545005999258137
+    },
+    {
+      "mlp_name": "steven-rice",
+      "final_layer_mse": 8.5772143165741e-08,
+      "adjusted_final_layer_score": 5.466507967533588e-08,
+      "flops_used": 1401501432002,
+      "residual_wall_time_s": 1.5647880002798047
+    },
+    {
+      "mlp_name": "sarah-kelley",
+      "final_layer_mse": 7.166821092141618e-08,
+      "adjusted_final_layer_score": 4.567623374686543e-08,
+      "flops_used": 1401501432002,
+      "residual_wall_time_s": 1.3106313997486723
+    },
+    {
+      "mlp_name": "christopher-morales",
+      "final_layer_mse": 5.8717667172913934e-08,
+      "adjusted_final_layer_score": 3.742247582825062e-08,
+      "flops_used": 1401501432002,
+      "residual_wall_time_s": 1.2750252996920608
+    },
+    {
+      "mlp_name": "cheryl-graham",
+      "final_layer_mse": 5.720086448945949e-08,
+      "adjusted_final_layer_score": 3.6455773394541134e-08,
+      "flops_used": 1401501432002,
+      "residual_wall_time_s": 1.2437633002045914
+    },
+    {
+      "mlp_name": "renee-park",
+      "final_layer_mse": 8.106133009277983e-08,
+      "adjusted_final_layer_score": 5.1662741591379806e-08,
+      "flops_used": 1401501432002,
+      "residual_wall_time_s": 1.3074132000037935
+    }
+  ]
+}

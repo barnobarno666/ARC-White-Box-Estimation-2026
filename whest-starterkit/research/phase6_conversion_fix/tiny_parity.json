@@ -1,0 +1,65 @@
+{
+  "source_sha256": {
+    "estimator_p6_k3_6_10_13.py": "7ae6340449897468bd10539ecc08011b77e67a4941addbc6825a16bf821e7ce4",
+    "estimator_p6_k3_twofactor_terminal.py": "8498085d5b90646c6d65ce23087b2e9331980a77cb44bfa6d762341f68dd05ac"
+  },
+  "tiny_parity": [
+    {
+      "precision": "float64",
+      "width": 8,
+      "depth": 1,
+      "max_abs": 0.0,
+      "rms": 0.0
+    },
+    {
+      "precision": "float64",
+      "width": 16,
+      "depth": 2,
+      "max_abs": 1.1102230246251565e-16,
+      "rms": 2.778943627920887e-17
+    },
+    {
+      "precision": "float64",
+      "width": 32,
+      "depth": 8,
+      "max_abs": 6.661338147750939e-16,
+      "rms": 1.2594127539720653e-16
+    },
+    {
+      "precision": "float64",
+      "width": 32,
+      "depth": 16,
+      "max_abs": 1.5501488981328748e-14,
+      "rms": 1.7757294479839453e-15
+    },
+    {
+      "precision": "float32",
+      "width": 8,
+      "depth": 1,
+      "max_abs": 5.960464477539063e-08,
+      "rms": 2.9802322387695312e-08
+    },
+    {
+      "precision": "float32",
+      "width": 16,
+      "depth": 2,
+      "max_abs": 8.940696716308594e-08,
+      "rms": 2.057358727824976e-08
+    },
+    {
+      "precision": "float32",
+      "width": 32,
+      "depth": 8,
+      "max_abs": 1.0654330253601074e-06,
+      "rms": 1.3515129637653445e-07
+    },
+    {
+      "precision": "float32",
+      "width": 32,
+      "depth": 16,
+      "max_abs": 4.342198371887207e-05,
+      "rms": 4.6249592742242385e-06
+    }
+  ],
+  "note": "Initial float32 2e-5 check failed on width32/depth16; float64 isolates algebra from rounding. Full-size panel required."
+}
