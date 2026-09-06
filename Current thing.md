@@ -100,6 +100,41 @@ score to beat: 1.1377e-07 (Leaderboard #1), 1.2236e-07 (Frozen control) -> ACHIE
 | **P6-FNP-K3 [7, 11, 14] (Candidate 2)** | Pure `flopscope.numpy` K3-simple with fast Step 5 & [7, 11, 14] prune (ret=0.58) | **7.6274e-08** | **0.9849** (98.49% util) | **7.5121e-08** | **-38.61%** | **8W - 0L** | < 0.20s | **NEW LEADERBOARD #2 RUNNER-UP (8W-0L Clean Sweep, -34.0% vs live #1)** |
 
 
+## Phase 6.5 Sequential Runbook Validation Results (Target < 4.00e-8, Stretch < 2.00e-8, Incumbent = 4.6655e-08 / 4.35e-08)
 
+| Method / Variant | Short Description | Raw Final MSE | Mean Score Mult | Adjusted Score | Max Residual Time | Failures | Wins vs Incumbent | Decision |
+|---|---|---|---|---|---|---|---|---|
+| P65-00 Incumbent Baseline | Frozen Incumbent (`estimator_p6_k3_twofactor_terminal.py`, ret=0.62) | 7.3203e-08 | 0.6373 (63.73%) | 4.6655e-08 | 1.3759s | 0 (diag) | Benchmark (8T) | VERIFIED BASELINE (RESEARCH_ONLY) |
+| **P65-02d Combined Exact** | Scalar-K4 & L0 spec + terminal split (ret=0.62) | **7.3203e-08** | **0.6334 (63.34%)** | **4.6369e-08** | 2.1034s | 0 (diag) | **8W - 0L** | **NEW EXACT_PARENT (8W-0L Clean Sweep, -8.6B FLOPs)** |
+| P65-03a-r045 | Retention r=0.45, schedule [6, 10, 13] | 2.0263e-07 | 0.5349 (53.49%) | 1.0839e-07 | 1.5478s | 0 (diag) | 0W - 8L | REJECT (+133.8% score regression vs Exact Parent) |
+| P65-03a-r055 | Retention r=0.55, schedule [6, 10, 13] | 1.1100e-07 | 0.5908 (59.08%) | 6.5575e-08 | 1.6790s | 0 (diag) | 0W - 8L | REJECT (+41.4% score regression vs Exact Parent) |
+| P65-03a-r070 | Retention r=0.70, schedule [6, 10, 13] | 5.0707e-08 | 0.6860 (68.60%) | 3.4787e-08 | 1.8853s | 0 (diag) | 8W - 0L | STRONG (+25.0% score reduction vs Exact Parent) |
+| **P65-03a-r080** | Retention r=0.80, schedule [6, 10, 13] | **4.0542e-08** | **0.7579 (75.79%)** | **3.0726e-08** | 2.1035s | 0 (diag) | **8W - 0L** | **NEW RETENTION CHAMPION (+33.7% score reduction, 8W-0L Clean Sweep)** |
+| P65-03b-s5912 | Schedule [5, 9, 12] with r*=0.80 | 4.1849e-08 | 0.7432 (74.32%) | 3.1101e-08 | 2.4452s | 0 (diag) | 5W - 3L vs r080 | Close contender (Ratio 1.0122 vs s61013) |
+| P65-03c-L6-m10 | Schedule [6, 10, 13], r=[0.70, 0.80, 0.80] | 4.3499e-08 | 0.7233 (72.33%) | 3.1462e-08 | 1.8195s | 0 (diag) | 4W - 4L vs r080 | REJECT (Ratio 1.0239) |
+| P65-03c-L6-p10 | Schedule [6, 10, 13], r=[0.90, 0.80, 0.80] | 3.8480e-08 | 0.7925 (79.25%) | 3.0494e-08 | 2.2880s | 0 (diag) | 4W - 4L vs r080 | Minor gain, 4W-4L tie (Ratio 0.9925) |
+| P65-03c-L10-m10 | Schedule [6, 10, 13], r=[0.80, 0.70, 0.80] | 4.3412e-08 | 0.7289 (72.89%) | 3.1644e-08 | 2.2625s | 0 (diag) | 1W - 7L vs r080 | REJECT (Ratio 1.0299) |
+| **P65-03c-L10-p10** | Schedule [6, 10, 13], r=[0.80, 0.90, 0.80] | **3.7854e-08** | **0.7868 (78.68%)** | **2.9784e-08** | 1.6050s | 0 (diag) | **8W - 0L vs r080** | **NEW RANK_PARENT (8W-0L Clean Sweep, Sub-3.0e-8 Barrier Broken!)** |
+| P65-03c-L13-m10 | Schedule [6, 10, 13], r=[0.80, 0.80, 0.70] | 4.1960e-08 | 0.7461 (74.61%) | 3.1305e-08 | 1.4709s | 0 (diag) | 1W - 7L vs r080 | REJECT (Ratio 1.0189) |
+| P65-03c-L13-p10 | Schedule [6, 10, 13], r=[0.80, 0.80, 0.90] | 3.9059e-08 | 0.7697 (76.97%) | 3.0062e-08 | 1.9731s | 0 (diag) | 7W - 1L vs r080 | Strong runner-up (Ratio 0.9784) |
 
-
+| P65-04a-normexact | Exact atom norm selector on RANK_PARENT | 4.0665e-08 | 0.7572 | 3.0792e-08 | 2.3742s | 0 | 0W - 8L vs Rank Parent | Ratio: 1.0338 |
+| P65-04a-exact | Exact individual-atom norm squared | 3.6755e-08 | 0.8096 | 2.9757e-08 | 2.9949s | 0 | 4W - 4L vs Rank Parent | REJECT (4W-4L, <6W gate) |
+| P65-05a-r045-comp | Compensated L10 (r=0.45) | 4.6834e-08 | 0.6740 | 3.1565e-08 | 1.9730s | 0 | 3W - 5L vs Select Parent | Ratio: 1.0598 |
+| P65-05a-r045-uncomp | Matched uncompensated L10 (r=0.45) | 7.2664e-08 | 0.6565 | 4.7706e-08 | 2.3547s | 0 | 0W - 8L vs Select Parent | Ratio: 1.6017 |
+| P65-05a-r055-comp | Compensated L10 (r=0.55) | 4.3168e-08 | 0.7064 | 3.0493e-08 | 2.2320s | 0 | 2W - 6L vs Select Parent | Ratio: 1.0238 |
+| P65-05a-r055-uncomp | Matched uncompensated L10 (r=0.55) | 5.3915e-08 | 0.6855 | 3.6958e-08 | 2.3652s | 0 | 0W - 8L vs Select Parent | Ratio: 1.2409 |
+| P65-07-s13-e050 | Diagonal Q extension (start=13, eta=0.5) | 4.0298e-08 | 0.7598 | 3.0620e-08 | 2.0984s | 0 | 1W - 7L vs Analytic Parent | Ratio: 1.0281 |
+| P65-07-s13-e100 | Diagonal Q extension (start=13, eta=1.0) | 4.0159e-08 | 0.7598 | 3.0514e-08 | 2.9495s | 0 | 1W - 7L vs Analytic Parent | Ratio: 1.0245 |
+| P65-07-s11-e050 | Diagonal Q extension (start=11, eta=0.5) | 3.9947e-08 | 0.7618 | 3.0431e-08 | 3.2065s | 0 | 1W - 7L vs Analytic Parent | Ratio: 1.0217 |
+| P65-07-s11-e100 | Diagonal Q extension (start=11, eta=1.0) | 3.9568e-08 | 0.7618 | 3.0142e-08 | 3.4799s | 0 | 2W - 6L vs Analytic Parent | Ratio: 1.0120 |
+| P65-07-s07-e050 | Diagonal Q extension (start=7, eta=0.5) | 3.9756e-08 | 0.7657 | 3.0442e-08 | 1.9214s | 0 | 1W - 7L vs Analytic Parent | Ratio: 1.0221 |
+| P65-07-s07-e100 | Diagonal Q extension (start=7, eta=1.0) | 3.9422e-08 | 0.7657 | 3.0186e-08 | 2.9497s | 0 | 1W - 7L vs Analytic Parent | Ratio: 1.0135 |
+| P65-08-n0512-a005 | Online K3 CV (N=512, alpha=0.05) | 5.6348e-08 | 0.7657 | 4.3144e-08 | 2.7757s | 0 | 0W - 8L vs K4 Parent | Ratio: 1.4486 |
+| P65-08-n0512-a010 | Online K3 CV (N=512, alpha=0.10) | 1.0459e-07 | 0.7657 | 8.0082e-08 | 2.5143s | 0 | 0W - 8L vs K4 Parent | Ratio: 2.6887 |
+| P65-08-n0512-a020 | Online K3 CV (N=512, alpha=0.20) | 2.9838e-07 | 0.7657 | 2.2846e-07 | 1.6924s | 0 | 0W - 8L vs K4 Parent | Ratio: 7.6707 |
+| P65-08-n1024-a005 | Online K3 CV (N=1024, alpha=0.05) | 4.7499e-08 | 0.7735 | 3.6740e-08 | 1.6979s | 0 | 0W - 8L vs K4 Parent | Ratio: 1.2336 |
+| P65-08-n1024-a010 | Online K3 CV (N=1024, alpha=0.10) | 7.0748e-08 | 0.7735 | 5.4723e-08 | 1.9009s | 0 | 0W - 8L vs K4 Parent | Ratio: 1.8373 |
+| P65-08-n1024-a020 | Online K3 CV (N=1024, alpha=0.20) | 1.6612e-07 | 0.7735 | 1.2849e-07 | 1.8989s | 0 | 0W - 8L vs K4 Parent | Ratio: 4.3142 |
+| P65-09-L13-m05 | Final neighbor: perturb last event L13 retention to 0.75 | 4.1162e-08 | 0.7520 | 3.0953e-08 | 1.8086s | 0 | 0W - 8L vs Best Parent | Ratio: 1.0392 |
+| P65-09-L13-p05 | Final neighbor: perturb last event L13 retention to 0.85 | 3.9828e-08 | 0.7638 | 3.0419e-08 | 2.0463s | 0 | 1W - 7L vs Best Parent | Ratio: 1.0213 |

@@ -1,0 +1,45 @@
+{
+  "last_completed": "P65-10",
+  "next_action": "COMPLETE",
+  "research_parent": {
+    "exp_id": "P65-03c-L10-p10",
+    "sha256": "b06d91bc155f19e696c690c2b9956c2ba2426ba142de3c7d6dcf7f078344255e",
+    "file": "D:\\ALL CODES\\AICROWD COMPETITION\\candidates\\estimator_p65_03c_L10_p10.py"
+  },
+  "exact_parent": {
+    "exp_id": "P65-02d-combined",
+    "sha256": "61af52017052ae9b4db74c735d564df0887e148e658602b9ff0ca8066c078a63",
+    "file": "candidates/estimator_p65_02d_combined.py"
+  },
+  "release_champion": {
+    "exp_id": "P6-330018-incumbent",
+    "sha256": "8498085d5b90646c6d65ce23087b2e9331980a77cb44bfa6d762341f68dd05ac",
+    "status": "HISTORICAL_OFFICIAL_#330018"
+  },
+  "last_receipt_time": "2026-09-06T18:40:34.613796Z",
+  "rank_parent": {
+    "exp_id": "P65-03c-L10-p10",
+    "sha256": "b06d91bc155f19e696c690c2b9956c2ba2426ba142de3c7d6dcf7f078344255e",
+    "file": "D:\\ALL CODES\\AICROWD COMPETITION\\candidates\\estimator_p65_03c_L10_p10.py"
+  },
+  "select_parent": {
+    "exp_id": "P65-03c-L10-p10",
+    "sha256": "b06d91bc155f19e696c690c2b9956c2ba2426ba142de3c7d6dcf7f078344255e",
+    "file": "D:\\ALL CODES\\AICROWD COMPETITION\\candidates\\estimator_p65_03c_L10_p10.py"
+  },
+  "slice_parent": {
+    "exp_id": "P65-03c-L10-p10",
+    "sha256": "b06d91bc155f19e696c690c2b9956c2ba2426ba142de3c7d6dcf7f078344255e",
+    "file": "D:\\ALL CODES\\AICROWD COMPETITION\\candidates\\estimator_p65_03c_L10_p10.py"
+  },
+  "k4_parent": {
+    "exp_id": "P65-03c-L10-p10",
+    "sha256": "b06d91bc155f19e696c690c2b9956c2ba2426ba142de3c7d6dcf7f078344255e",
+    "file": "D:\\ALL CODES\\AICROWD COMPETITION\\candidates\\estimator_p65_03c_L10_p10.py"
+  },
+  "cv_parent": {
+    "exp_id": "P65-03c-L10-p10",
+    "sha256": "b06d91bc155f19e696c690c2b9956c2ba2426ba142de3c7d6dcf7f078344255e",
+    "file": "D:\\ALL CODES\\AICROWD COMPETITION\\candidates\\estimator_p65_03c_L10_p10.py"
+  }
+}
