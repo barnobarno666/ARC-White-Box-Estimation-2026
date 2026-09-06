@@ -11,6 +11,7 @@ import csv
 from pathlib import Path
 
 import matplotlib.pyplot as plt
+import matplotlib.patheffects as path_effects
 from matplotlib.ticker import PercentFormatter
 
 
@@ -154,7 +155,7 @@ def main() -> None:
         FINAL_LAYER_MSE,
         c=ranks,
         cmap="viridis_r",
-        s=78,
+        s=230,
         alpha=0.88,
         edgecolor="white",
         linewidth=0.7,
@@ -163,7 +164,7 @@ def main() -> None:
     ax.scatter(
         utilization[mine],
         FINAL_LAYER_MSE[mine],
-        s=150,
+        s=330,
         color="#e41a1c",
         edgecolor="black",
         linewidth=1.15,
@@ -195,6 +196,45 @@ def main() -> None:
     fig.colorbar(point_colors, ax=ax, pad=0.015, label="Leaderboard rank (lower is better)")
     ax.legend(loc="upper left", frameon=False)
     fig.savefig(OUTDIR / "phase2_mse_vs_compute_utilization_top50.png", dpi=220, bbox_inches="tight")
+
+    # A rank-labelled variant: the number inside each bubble is the displayed
+    # leaderboard rank.  Keeping the coordinates unchanged is more important
+    # than spreading close bubbles apart, so naturally similar entries may
+    # touch or partly overlap.
+    colormap = plt.colormaps["viridis_r"]
+    rank_min, rank_max = min(ranks), max(ranks)
+    for rank, name, fraction, mse in zip(ranks, names, utilization, FINAL_LAYER_MSE, strict=True):
+        if name == "subarno_sadat_barno":
+            continue
+        rgba = colormap((rank - rank_min) / (rank_max - rank_min))
+        luminance = 0.2126 * rgba[0] + 0.7152 * rgba[1] + 0.0722 * rgba[2]
+        text_color = "#111827" if luminance > 0.56 else "white"
+        ax.text(
+            fraction,
+            mse,
+            str(rank),
+            ha="center",
+            va="center",
+            fontsize=6.7,
+            fontweight="bold",
+            color=text_color,
+            zorder=6,
+            path_effects=[path_effects.withStroke(linewidth=1.0, foreground="white" if text_color == "#111827" else "#111827")],
+        )
+    ax.text(
+        utilization[mine],
+        FINAL_LAYER_MSE[mine],
+        "40",
+        ha="center",
+        va="center",
+        fontsize=7.3,
+        fontweight="bold",
+        color="white",
+        zorder=7,
+        path_effects=[path_effects.withStroke(linewidth=1.2, foreground="#111827")],
+    )
+    ax.set_title("Phase 2 top 50: final-layer MSE versus compute utilization\nBubble text = leaderboard rank", fontweight="bold", pad=14)
+    fig.savefig(OUTDIR / "phase2_mse_vs_compute_utilization_top50_rank_labeled.png", dpi=220, bbox_inches="tight")
 
 
 if __name__ == "__main__":
