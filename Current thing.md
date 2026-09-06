@@ -1,6 +1,7 @@
-CURRENT SUBMISSION ID: #330015 (Track: https://www.aicrowd.com/challenges/arc-white-box-estimation-challenge-2026/submissions/330015) [P6 Pure fnp K3 [6, 10, 13], score 7.1370e-08, 8W-0L] & #330016 (Track: https://www.aicrowd.com/challenges/arc-white-box-estimation-challenge-2026/submissions/330016) [P6 Pure fnp K3 [7, 11, 14], score 7.5121e-08, 8W-0L] — prev #329946 (1.1377e-07)
-CURRENT BEST VALIDATION SCORE: 7.1370e-08 (NEW ALL-TIME RECORD: 8W-0L CLEAN SWEEP VS CONTROL & LEADERBOARD #1)
-score to beat: 1.1377e-07 (Leaderboard #1), 1.2236e-07 (Frozen control) -> ACHIEVED 7.1370e-08 (-37.3% error reduction)
+CURRENT SUBMISSION ID: #330088 (https://www.aicrowd.com/challenges/arc-white-box-estimation-challenge-2026/submissions/330088) [Phase 6.5 Finalist P65-03c-L10-p10, local score 2.9784e-08, 8W-0L] | Prev Graded Champion #330018 (official score 4.35e-08, raw MSE 6.82e-08, util 63.73%), #330015 (7.1370e-08), #330016 (7.5121e-08)
+CURRENT BEST LOCAL VALIDATION SCORE: 2.9784e-08 (Phase 6.5 Finalist P65-03c-L10-p10 / estimator_p65_final.py — SUB-3.0e-8 BARRIER BROKEN: 8W-0L CLEAN SWEEP VS INCUMBENT, -36.16% ERROR REDUCTION)
+score to beat: 4.6655e-08 (Phase 6 local diagnostic), 4.35e-08 (Graded #330018), 7.1370e-08 (Live #330015) -> ACHIEVED 2.9784e-08 (Raw MSE 3.7854e-08, Util 78.68%)
+
 
 
 ## Phase 2 (1024x16, Budget 2^41) Validation Results (Fixed 8-MLP Panel)
@@ -117,24 +118,24 @@ score to beat: 1.1377e-07 (Leaderboard #1), 1.2236e-07 (Frozen control) -> ACHIE
 | **P65-03c-L10-p10** | Schedule [6, 10, 13], r=[0.80, 0.90, 0.80] | **3.7854e-08** | **0.7868 (78.68%)** | **2.9784e-08** | 1.6050s | 0 (diag) | **8W - 0L vs r080** | **NEW RANK_PARENT (8W-0L Clean Sweep, Sub-3.0e-8 Barrier Broken!)** |
 | P65-03c-L13-m10 | Schedule [6, 10, 13], r=[0.80, 0.80, 0.70] | 4.1960e-08 | 0.7461 (74.61%) | 3.1305e-08 | 1.4709s | 0 (diag) | 1W - 7L vs r080 | REJECT (Ratio 1.0189) |
 | P65-03c-L13-p10 | Schedule [6, 10, 13], r=[0.80, 0.80, 0.90] | 3.9059e-08 | 0.7697 (76.97%) | 3.0062e-08 | 1.9731s | 0 (diag) | 7W - 1L vs r080 | Strong runner-up (Ratio 0.9784) |
-
-| P65-04a-normexact | Exact atom norm selector on RANK_PARENT | 4.0665e-08 | 0.7572 | 3.0792e-08 | 2.3742s | 0 | 0W - 8L vs Rank Parent | Ratio: 1.0338 |
-| P65-04a-exact | Exact individual-atom norm squared | 3.6755e-08 | 0.8096 | 2.9757e-08 | 2.9949s | 0 | 4W - 4L vs Rank Parent | REJECT (4W-4L, <6W gate) |
-| P65-05a-r045-comp | Compensated L10 (r=0.45) | 4.6834e-08 | 0.6740 | 3.1565e-08 | 1.9730s | 0 | 3W - 5L vs Select Parent | Ratio: 1.0598 |
-| P65-05a-r045-uncomp | Matched uncompensated L10 (r=0.45) | 7.2664e-08 | 0.6565 | 4.7706e-08 | 2.3547s | 0 | 0W - 8L vs Select Parent | Ratio: 1.6017 |
-| P65-05a-r055-comp | Compensated L10 (r=0.55) | 4.3168e-08 | 0.7064 | 3.0493e-08 | 2.2320s | 0 | 2W - 6L vs Select Parent | Ratio: 1.0238 |
-| P65-05a-r055-uncomp | Matched uncompensated L10 (r=0.55) | 5.3915e-08 | 0.6855 | 3.6958e-08 | 2.3652s | 0 | 0W - 8L vs Select Parent | Ratio: 1.2409 |
-| P65-07-s13-e050 | Diagonal Q extension (start=13, eta=0.5) | 4.0298e-08 | 0.7598 | 3.0620e-08 | 2.0984s | 0 | 1W - 7L vs Analytic Parent | Ratio: 1.0281 |
-| P65-07-s13-e100 | Diagonal Q extension (start=13, eta=1.0) | 4.0159e-08 | 0.7598 | 3.0514e-08 | 2.9495s | 0 | 1W - 7L vs Analytic Parent | Ratio: 1.0245 |
-| P65-07-s11-e050 | Diagonal Q extension (start=11, eta=0.5) | 3.9947e-08 | 0.7618 | 3.0431e-08 | 3.2065s | 0 | 1W - 7L vs Analytic Parent | Ratio: 1.0217 |
-| P65-07-s11-e100 | Diagonal Q extension (start=11, eta=1.0) | 3.9568e-08 | 0.7618 | 3.0142e-08 | 3.4799s | 0 | 2W - 6L vs Analytic Parent | Ratio: 1.0120 |
-| P65-07-s07-e050 | Diagonal Q extension (start=7, eta=0.5) | 3.9756e-08 | 0.7657 | 3.0442e-08 | 1.9214s | 0 | 1W - 7L vs Analytic Parent | Ratio: 1.0221 |
-| P65-07-s07-e100 | Diagonal Q extension (start=7, eta=1.0) | 3.9422e-08 | 0.7657 | 3.0186e-08 | 2.9497s | 0 | 1W - 7L vs Analytic Parent | Ratio: 1.0135 |
-| P65-08-n0512-a005 | Online K3 CV (N=512, alpha=0.05) | 5.6348e-08 | 0.7657 | 4.3144e-08 | 2.7757s | 0 | 0W - 8L vs K4 Parent | Ratio: 1.4486 |
-| P65-08-n0512-a010 | Online K3 CV (N=512, alpha=0.10) | 1.0459e-07 | 0.7657 | 8.0082e-08 | 2.5143s | 0 | 0W - 8L vs K4 Parent | Ratio: 2.6887 |
-| P65-08-n0512-a020 | Online K3 CV (N=512, alpha=0.20) | 2.9838e-07 | 0.7657 | 2.2846e-07 | 1.6924s | 0 | 0W - 8L vs K4 Parent | Ratio: 7.6707 |
-| P65-08-n1024-a005 | Online K3 CV (N=1024, alpha=0.05) | 4.7499e-08 | 0.7735 | 3.6740e-08 | 1.6979s | 0 | 0W - 8L vs K4 Parent | Ratio: 1.2336 |
-| P65-08-n1024-a010 | Online K3 CV (N=1024, alpha=0.10) | 7.0748e-08 | 0.7735 | 5.4723e-08 | 1.9009s | 0 | 0W - 8L vs K4 Parent | Ratio: 1.8373 |
-| P65-08-n1024-a020 | Online K3 CV (N=1024, alpha=0.20) | 1.6612e-07 | 0.7735 | 1.2849e-07 | 1.8989s | 0 | 0W - 8L vs K4 Parent | Ratio: 4.3142 |
-| P65-09-L13-m05 | Final neighbor: perturb last event L13 retention to 0.75 | 4.1162e-08 | 0.7520 | 3.0953e-08 | 1.8086s | 0 | 0W - 8L vs Best Parent | Ratio: 1.0392 |
-| P65-09-L13-p05 | Final neighbor: perturb last event L13 retention to 0.85 | 3.9828e-08 | 0.7638 | 3.0419e-08 | 2.0463s | 0 | 1W - 7L vs Best Parent | Ratio: 1.0213 |
+| P65-04a-normexact | Exact atom norm selector on RANK_PARENT | 4.0665e-08 | 0.7572 (75.72%) | 3.0792e-08 | 2.3742s | 0 (diag) | 0W - 8L vs Rank Parent | REJECT (Ratio: 1.0338) |
+| P65-04a-exact | Exact individual-atom norm squared | 3.6755e-08 | 0.8096 (80.96%) | 2.9757e-08 | 2.9949s | 0 (diag) | 4W - 4L vs Rank Parent | REJECT (4W-4L, <6W gate) |
+| P65-05a-r045-comp | Compensated L10 (r=0.45) | 4.6834e-08 | 0.6740 (67.40%) | 3.1565e-08 | 1.9730s | 0 (diag) | 3W - 5L vs Select Parent | REJECT (Ratio: 1.0598) |
+| P65-05a-r045-uncomp | Matched uncompensated L10 (r=0.45) | 7.2664e-08 | 0.6565 (65.65%) | 4.7706e-08 | 2.3547s | 0 (diag) | 0W - 8L vs Select Parent | REJECT (Ratio: 1.6017) |
+| P65-05a-r055-comp | Compensated L10 (r=0.55) | 4.3168e-08 | 0.7064 (70.64%) | 3.0493e-08 | 2.2320s | 0 (diag) | 2W - 6L vs Select Parent | REJECT (Ratio: 1.0238) |
+| P65-05a-r055-uncomp | Matched uncompensated L10 (r=0.55) | 5.3915e-08 | 0.6855 (68.55%) | 3.6958e-08 | 2.3652s | 0 (diag) | 0W - 8L vs Select Parent | REJECT (Ratio: 1.2409) |
+| P65-07-s13-e050 | Diagonal Q extension (start=13, eta=0.5) | 4.0298e-08 | 0.7598 (75.98%) | 3.0620e-08 | 2.0984s | 0 (diag) | 1W - 7L vs Analytic Parent | REJECT (Ratio: 1.0281) |
+| P65-07-s13-e100 | Diagonal Q extension (start=13, eta=1.0) | 4.0159e-08 | 0.7598 (75.98%) | 3.0514e-08 | 2.9495s | 0 (diag) | 1W - 7L vs Analytic Parent | REJECT (Ratio: 1.0245) |
+| P65-07-s11-e050 | Diagonal Q extension (start=11, eta=0.5) | 3.9947e-08 | 0.7618 (76.18%) | 3.0431e-08 | 3.2065s | 0 (diag) | 1W - 7L vs Analytic Parent | REJECT (Ratio: 1.0217) |
+| P65-07-s11-e100 | Diagonal Q extension (start=11, eta=1.0) | 3.9568e-08 | 0.7618 (76.18%) | 3.0142e-08 | 3.4799s | 0 (diag) | 2W - 6L vs Analytic Parent | REJECT (Ratio: 1.0120) |
+| P65-07-s07-e050 | Diagonal Q extension (start=7, eta=0.5) | 3.9756e-08 | 0.7657 (76.57%) | 3.0442e-08 | 1.9214s | 0 (diag) | 1W - 7L vs Analytic Parent | REJECT (Ratio: 1.0221) |
+| P65-07-s07-e100 | Diagonal Q extension (start=7, eta=1.0) | 3.9422e-08 | 0.7657 (76.57%) | 3.0186e-08 | 2.9497s | 0 (diag) | 1W - 7L vs Analytic Parent | REJECT (Ratio: 1.0135) |
+| P65-08-n0512-a005 | Online K3 CV (N=512, alpha=0.05) | 5.6348e-08 | 0.7657 (76.57%) | 4.3144e-08 | 2.7757s | 0 (diag) | 0W - 8L vs K4 Parent | REJECT (Ratio: 1.4486) |
+| P65-08-n0512-a010 | Online K3 CV (N=512, alpha=0.10) | 1.0459e-07 | 0.7657 (76.57%) | 8.0082e-08 | 2.5143s | 0 (diag) | 0W - 8L vs K4 Parent | REJECT (Ratio: 2.6887) |
+| P65-08-n0512-a020 | Online K3 CV (N=512, alpha=0.20) | 2.9838e-07 | 0.7657 (76.57%) | 2.2846e-07 | 1.6924s | 0 (diag) | 0W - 8L vs K4 Parent | REJECT (Ratio: 7.6707) |
+| P65-08-n1024-a005 | Online K3 CV (N=1024, alpha=0.05) | 4.7499e-08 | 0.7735 (77.35%) | 3.6740e-08 | 1.6979s | 0 (diag) | 0W - 8L vs K4 Parent | REJECT (Ratio: 1.2336) |
+| P65-08-n1024-a010 | Online K3 CV (N=1024, alpha=0.10) | 7.0748e-08 | 0.7735 (77.35%) | 5.4723e-08 | 1.9009s | 0 (diag) | 0W - 8L vs K4 Parent | REJECT (Ratio: 1.8373) |
+| P65-08-n1024-a020 | Online K3 CV (N=1024, alpha=0.20) | 1.6612e-07 | 0.7735 (77.35%) | 1.2849e-07 | 1.8989s | 0 (diag) | 0W - 8L vs K4 Parent | REJECT (Ratio: 4.3142) |
+| P65-09-L13-m05 | Final neighbor: perturb last event L13 retention to 0.75 | 4.1162e-08 | 0.7520 (75.20%) | 3.0953e-08 | 1.8086s | 0 (diag) | 0W - 8L vs Best Parent | REJECT (Ratio: 1.0392) |
+| P65-09-L13-p05 | Final neighbor: perturb last event L13 retention to 0.85 | 3.9828e-08 | 0.7638 (76.38%) | 3.0419e-08 | 2.0463s | 0 (diag) | 1W - 7L vs Best Parent | REJECT (Ratio: 1.0213) |
+| **P65-10-unrelaxed** | Finalist official unrelaxed run (`estimator_p65_final.py`) | **3.7854e-08** | **0.7868 (78.68%)** | **2.9784e-08** | 1.6429s | 8 (local teardown) | **8W - 0L vs Incumbent** | **PHASE 6.5 FINALIST VERIFIED (Packaged archive: submission_phase65.tar.gz)** |
