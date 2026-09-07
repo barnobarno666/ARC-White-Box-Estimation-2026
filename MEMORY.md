@@ -116,6 +116,9 @@ The current champion control is deployed in [whest-starterkit/estimator.py](whes
 * Run 1 Champion (Self-Calibrated Hermite): `1.6500e-07` (Target `< 2.5e-7` achieved)
 * Run 2 Champion (Prior-Calibrated Hermite): `1.2319e-07` (Target `< 1.24e-7` achieved)
 * Run 3 Champion (Blended Dual-Kernel Hermite): **`1.2236e-07`** (8W-0L Clean Sweep vs Run 2 Champion)
+* Phase 6 Champion (#330018): **`4.3500e-08`** (Raw MSE `6.82e-08`, utilization `63.73%`, cumulant propagation K3-simple)
+* Phase 6.5 Champion (#330088): **`2.9784e-08`** (Raw MSE `3.7854e-08`, utilization `78.68%`, L10-p10 schedule)
+* Phase 7 Champion (#330160): **`2.5335e-08`** (Official Graded Score: `2.53348e-08`, Raw MSE `3.7853e-08`, utilization `69.58%`, full 1-level Strassen on factor transport + repeated slices)
 
 ---
 

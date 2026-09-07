@@ -17,7 +17,8 @@
     "P8-X",
     "P8-F0",
     "P8-F1",
-    "P8-F2"
+    "P8-F2",
+    "P8-L3"
   ],
   "completed_experiments": {
     "P8-00-ctrl7-smoke1": {
@@ -136,8 +137,10 @@
   "frozen_parents": {
     "CONTROL7": "44723be93f8a432fa493a0218396a8346728277ba0a694c483fd9369ad26080f",
     "CONTROL65": "b06d91bc155f19e696c690c2b9956c2ba2426ba142de3c7d6dcf7f078344255e",
-    "ANGULAR8": "ac4ea4be80f9bb29c9d002cad1144e1282b696383f40904bf6bd011555ca4adc",
-    "FINAL8": "68b1b7b4fd05b9f14dba84ec6ce987a0a26432aa1d2c0ab9ca2629cba034c08c"
+    "ANGULAR8": "8fff0fcc20792254366c9ac4ad29a20f10097f88fb931854f5b26420d80e66b0",
+    "FINAL8": "034547d411aa06d4e08b274efafecf02a19b9e1f30434203c13cea808e2527fc",
+    "LEARNED8": null,
+    "GATE8": null
   },
   "best_candidate": {
     "exp_id": "X-STRASSEN-ANGULAR",
@@ -145,8 +148,8 @@
     "raw_mse": 3.486006372455108e-08,
     "utilization": 0.6957743467492037,
     "confirmation_score": 2.479045253136425e-08,
-    "candidate_sha256": "68b1b7b4fd05b9f14dba84ec6ce987a0a26432aa1d2c0ab9ca2629cba034c08c",
+    "candidate_sha256": "034547d411aa06d4e08b274efafecf02a19b9e1f30434203c13cea808e2527fc",
     "submission_archive": "research/phase8/release/submission_phase8.tar.gz",
-    "submission_archive_sha256": "5e3ae3711649fdfb4d01e8ef6a0169dc2a9268b85b78fe6561a8fb04b6c89db5"
+    "submission_archive_sha256": "c39df06db81cfead485d839d5039ae0a16d35bb72c5fa28af76ce34339994df6"
   }
 }

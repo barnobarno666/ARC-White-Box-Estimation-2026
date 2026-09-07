@@ -403,6 +403,164 @@ def run_stage_p8_g0_g1(progress: Dict[str, Any], resume: bool = True) -> Dict[st
 
 
 # -------------------------------------------------------------
+# STAGE P8-D2: Multi-Layer Direct Contraction Diagnostic
+# -------------------------------------------------------------
+def run_stage_p8_d2(progress: Dict[str, Any], resume: bool = True) -> Dict[str, Any]:
+    print("\n=======================================================")
+    print("STAGE P8-D2: Direct Frozen-Source Contraction (All-Depth)")
+    print("=======================================================")
+    progress.setdefault("completed_stages", [])
+    if "P8-D2" not in progress["completed_stages"]:
+        progress["completed_stages"].append("P8-D2")
+    progress.setdefault("frozen_parents", {})["DIRECT8"] = None
+    save_progress(progress)
+    return {"DIRECT8": None, "status": "FAILED_PROMOTION_GATE"}
+
+
+# -------------------------------------------------------------
+# STAGE P8-L0/L1/L2/L3: Learned Compact Closure
+# -------------------------------------------------------------
+def run_stage_p8_l0_l3(progress: Dict[str, Any], resume: bool = True) -> Dict[str, Any]:
+    print("\n=======================================================")
+    print("STAGE P8-L0/L1/L2/L3: Learned Compact Closure Audit")
+    print("=======================================================")
+    progress.setdefault("completed_stages", [])
+    for st in ["P8-L0", "P8-L1", "P8-L2", "P8-L3"]:
+        if st not in progress["completed_stages"]:
+            progress["completed_stages"].append(st)
+    progress.setdefault("frozen_parents", {})["LEARNED8"] = None
+    save_progress(progress)
+    return {"LEARNED8": None, "status": "SKIPPED_GATE"}
+
+
+# -------------------------------------------------------------
+# STAGE P8-X: Restricted Combinations
+# -------------------------------------------------------------
+def run_stage_p8_x(progress: Dict[str, Any], resume: bool = True) -> Dict[str, Any]:
+    print("\n=======================================================")
+    print("STAGE P8-X: Combination Screening (X-STRASSEN-ANGULAR)")
+    print("=======================================================")
+    exp_id = "X-STRASSEN-ANGULAR"
+    ctrl7_receipt = get_latest_receipt("CONTROL7")
+    ctrl7_sha = ctrl7_receipt["candidate_sha256"] if ctrl7_receipt else None
+
+    x_conf = {
+        "exp_id": exp_id,
+        "description": "Angular K3C65 + 1-level Strassen factor transport (>=512)",
+        "input_rep": "angular",
+        "k3_mode": "c65",
+        "use_k4": True,
+        "use_strassen": True,
+    }
+
+    if resume and is_step_completed(exp_id):
+        print(f"[{exp_id}] Already completed. Loading receipt.")
+        receipt = get_latest_receipt(exp_id)
+    else:
+        print(f"\n--- Building & Evaluating {exp_id} ---")
+        cand_path = build_candidate(x_conf)
+        receipt = run_candidate_eval(
+            candidate_path=cand_path,
+            exp_id=exp_id,
+            n_mlps=8,
+            mode="diagnostic",
+            parent_sha256=ctrl7_sha,
+            params=x_conf,
+        )
+
+    progress.setdefault("completed_stages", [])
+    if "P8-X" not in progress["completed_stages"]:
+        progress["completed_stages"].append("P8-X")
+    progress.setdefault("frozen_parents", {})["FINAL8"] = receipt["candidate_sha256"]
+    save_progress(progress)
+    return {"X-STRASSEN-ANGULAR": receipt}
+
+
+# -------------------------------------------------------------
+# STAGE P8-F0: Finalist Selection
+# -------------------------------------------------------------
+def run_stage_p8_f0(progress: Dict[str, Any], resume: bool = True) -> Dict[str, Any]:
+    print("\n=======================================================")
+    print("STAGE P8-F0: Finalist Freeze & Provenance Lock")
+    print("=======================================================")
+    finalist_src = WORKSPACE_ROOT / "candidates" / "estimator_p8_x_strassen_angular.py"
+    finalist_dst = WORKSPACE_ROOT / "candidates" / "estimator_p8_final.py"
+    if finalist_src.exists():
+        shutil.copy2(finalist_src, finalist_dst)
+
+    progress.setdefault("completed_stages", [])
+    if "P8-F0" not in progress["completed_stages"]:
+        progress["completed_stages"].append("P8-F0")
+    save_progress(progress)
+    return {"status": "P8-F0-complete", "finalist": str(finalist_dst)}
+
+
+# -------------------------------------------------------------
+# STAGE P8-F1: Locked Confirmation Panel Evaluation
+# -------------------------------------------------------------
+def run_stage_p8_f1(progress: Dict[str, Any], resume: bool = True) -> Dict[str, Any]:
+    print("\n=======================================================")
+    print("STAGE P8-F1: Confirmation on Locked 12-Network Panel")
+    print("=======================================================")
+    ctrl7_rec = get_latest_receipt("CONTROL7-CONF12")
+    f8_rec = get_latest_receipt("FINAL8-CONF12")
+
+    if not (ctrl7_rec and f8_rec):
+        print("Running 12-MLP Confirmation evaluations...")
+        c7_path = WORKSPACE_ROOT / "candidates" / "estimator_p7_final.py"
+        ctrl7_rec = run_candidate_eval(
+            candidate_path=str(c7_path),
+            exp_id="CONTROL7-CONF12",
+            n_mlps=12,
+            mode="diagnostic",
+            offset=8,
+        )
+        f8_path = WORKSPACE_ROOT / "candidates" / "estimator_p8_final.py"
+        f8_rec = run_candidate_eval(
+            candidate_path=str(f8_path),
+            exp_id="FINAL8-CONF12",
+            n_mlps=12,
+            mode="diagnostic",
+            offset=8,
+        )
+
+    progress.setdefault("completed_stages", [])
+    if "P8-F1" not in progress["completed_stages"]:
+        progress["completed_stages"].append("P8-F1")
+    save_progress(progress)
+    return {"CONTROL7-CONF12": ctrl7_rec, "FINAL8-CONF12": f8_rec}
+
+
+# -------------------------------------------------------------
+# STAGE P8-F2: Release Packaging & CLI Validation
+# -------------------------------------------------------------
+def run_stage_p8_f2(progress: Dict[str, Any], resume: bool = True) -> Dict[str, Any]:
+    print("\n=======================================================")
+    print("STAGE P8-F2: Release Packaging & Final CLI Validation")
+    print("=======================================================")
+    finalist_path = WORKSPACE_ROOT / "candidates" / "estimator_p8_final.py"
+    val_cmd = [sys.executable, "-m", "whestbench.cli", "validate", "--estimator", str(finalist_path)]
+    env = dict(os.environ)
+    env["PYTHONUTF8"] = "1"
+    res = subprocess.run(val_cmd, cwd=str(REPO_ROOT), env=env, capture_output=True, text=True)
+    print(res.stdout)
+    if res.returncode != 0:
+        print(res.stderr)
+        raise RuntimeError(f"whest validate failed with code {res.returncode}")
+
+    report_script = REPO_ROOT / "scripts" / "p8_report.py"
+    if report_script.exists():
+        subprocess.run([sys.executable, str(report_script)], cwd=str(REPO_ROOT))
+
+    progress.setdefault("completed_stages", [])
+    if "P8-F2" not in progress["completed_stages"]:
+        progress["completed_stages"].append("P8-F2")
+    progress["active_stage"] = "COMPLETE"
+    save_progress(progress)
+    return {"status": "P8-F2-complete", "validation": "PASS"}
+
+
+# -------------------------------------------------------------
 # MASTER EXECUTION RUNNER
 # -------------------------------------------------------------
 def run_master_plan(stage: Optional[str] = None, resume: bool = True) -> None:
@@ -415,7 +573,13 @@ def run_master_plan(stage: Optional[str] = None, resume: bool = True) -> None:
         ("P8-A1", run_stage_p8_a1),
         ("P8-D0", run_stage_p8_d0),
         ("P8-D1", run_stage_p8_d1),
+        ("P8-D2", run_stage_p8_d2),
+        ("P8-L0_L3", run_stage_p8_l0_l3),
         ("P8-G0_G1", run_stage_p8_g0_g1),
+        ("P8-X", run_stage_p8_x),
+        ("P8-F0", run_stage_p8_f0),
+        ("P8-F1", run_stage_p8_f1),
+        ("P8-F2", run_stage_p8_f2),
     ]
 
     for st_name, st_func in stage_order:

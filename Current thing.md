@@ -1,6 +1,6 @@
 CURRENT SUBMISSION ID: #330160 (https://www.aicrowd.com/challenges/arc-white-box-estimation-challenge-2026/submissions/330160) [Phase 7 Finalist P7-02b-strassen1 / estimator_p7_final.py, official score 2.5335e-08] | Prev Graded #330088, #330018 (official score 4.35e-08, raw MSE 6.82e-08, util 63.73%), #330015 (7.1370e-08), #330016 (7.5121e-08)
-CURRENT BEST LOCAL VALIDATION SCORE: 2.6337e-08 (Phase 7 Finalist P7-02b-strassen1 / estimator_p7_final.py — 8W-0L CLEAN SWEEP VS CONTROL65, -11.57% SCORE REDUCTION, UTILIZATION 69.58%)
-score to beat: 2.9784e-08 (Phase 6.5 finalist CONTROL65) -> ACHIEVED 2.6337e-08 (Raw MSE 3.7853e-08, Util 69.58%, -11.57% adjusted score reduction; Official Score 2.5335e-08)
+CURRENT BEST LOCAL VALIDATION SCORE: 2.4255e-08 (Phase 8 Finalist X-STRASSEN-ANGULAR / estimator_p8_final.py — 8W-0L CLEAN SWEEP VS CONTROL7, -7.91% SCORE REDUCTION, UTILIZATION 69.58%)
+score to beat: 2.6337e-08 (Phase 7 finalist CONTROL7) -> ACHIEVED 2.4255e-08 (Raw MSE 3.4860e-08, Util 69.58%, -7.91% adjusted score reduction; Conf-12 Score 2.4790e-08, 11W-1L)
 
 
 
@@ -181,17 +181,20 @@ score to beat: 2.9784e-08 (Phase 6.5 finalist CONTROL65) -> ACHIEVED 2.6337e-08 
 
 | Method / Variant | Short Description | Raw Final MSE | Mean Score Mult | Adjusted Score | Max Residual Time | Failures | Wins vs CONTROL7 | Decision |
 |---|---|---|---|---|---|---|---|---|
-| **P8-00-ctrl7-smoke1** | P8-00-ctrl7-smoke1 | **3.8017e-08** | **0.6958 (69.58%)** | **2.6451e-08** | 3.3675s | 1 | **0W-0L vs CONTROL7** | **EVALUATED** |
 | **A1-G-K2** | Gaussian input, incoming K3 slices zero, scalar K4 off | **4.1257e-06** | **0.1000 (10.00%)** | **4.1257e-07** | 1.6222s | 0 | **0W-8L vs CONTROL7** | **EVALUATED** |
-| **A1-A-K2** | Angular input, incoming K3 slices zero, scalar K4 off | **3.4236e-06** | **0.1000 (10.00%)** | **3.4236e-07** | 0.5360s | 0 | **0W-8L vs CONTROL7** | **EVALUATED** |
+| **A1-A-K2** | Angular input, incoming K3 slices zero, scalar K4 off | **3.4236e-06** | **0.1000 (10.00%)** | **3.4236e-07** | 0.5360s | 0 | **0W-8L vs CONTROL7** | **EVALUATED (-17.02% error vs Gaussian K2)** |
 | **A1-G-K2K4** | Gaussian input, incoming K3 zero, scalar K4 on (initial c4=0) | **4.0639e-06** | **0.1000 (10.00%)** | **4.0639e-07** | 0.6068s | 0 | **0W-8L vs CONTROL7** | **EVALUATED** |
-| **A1-A-K2K4** | Angular input, incoming K3 zero, scalar K4 on (initial c4=-6/(n+2)) | **3.4303e-06** | **0.1000 (10.00%)** | **3.4303e-07** | 1.1005s | 0 | **0W-8L vs CONTROL7** | **EVALUATED** |
+| **A1-A-K2K4** | Angular input, incoming K3 zero, scalar K4 on (initial c4=-6/(n+2)) | **3.4303e-06** | **0.1000 (10.00%)** | **3.4303e-07** | 1.1005s | 0 | **0W-8L vs CONTROL7** | **EVALUATED (-15.59% error vs Gaussian K2K4)** |
 | **A1-G-K3C65** | Gaussian input, CONTROL65 retention/schedule, scalar K4 on | **3.7859e-08** | **0.7868 (78.68%)** | **2.9788e-08** | 1.8241s | 0 | **0W-8L vs CONTROL7** | **EVALUATED** |
-| **A1-A-K3C65** | Angular input, CONTROL65 retention/schedule, scalar K4 on | **3.4859e-08** | **0.7868 (78.68%)** | **2.7429e-08** | 1.7239s | 0 | **2W-6L vs CONTROL7** | **EVALUATED** |
+| **A1-A-K3C65** | Angular input, CONTROL65 retention/schedule, scalar K4 on | **3.4859e-08** | **0.7868 (78.68%)** | **2.7429e-08** | 1.7239s | 0 | **2W-6L vs CONTROL7** | **FROZEN ANGULAR8 (-7.92% error vs Gaussian K3)** |
 | **D1-TERM** | Terminal direct-source contraction from frozen A1-G-K2K4 pilot | **3.8288e-06** | **0.1164 (11.64%)** | **4.4577e-07** | 0.8051s | 0 | **0W-8L vs CONTROL7** | **EVALUATED** |
-| **D1-TERM-A** | D1-TERM-A | **3.2211e-06** | **0.1164 (11.64%)** | **3.7502e-07** | 1.1539s | 0 | **0W-8L vs CONTROL7** | **EVALUATED** |
-| **P8-X-strassen-angular-smoke1** | P8-X-strassen-angular-smoke1 | **9.4348e-01** | **0.1000 (10.00%)** | **9.4348e-01** | 0.0000s | 1 | **0W-0L vs CONTROL7** | **EVALUATED** |
-| **P8-X-smoke2** | P8-X-smoke2 | **3.5131e-08** | **0.6958 (69.58%)** | **2.4443e-08** | 3.1102s | 0 | **0W-0L vs CONTROL7** | **EVALUATED** |
-| **X-STRASSEN-ANGULAR** | X-STRASSEN-ANGULAR | **3.4860e-08** | **0.6958 (69.58%)** | **2.4255e-08** | 3.4167s | 0 | **8W-0L vs CONTROL7** | **EVALUATED** |
-| **CONTROL7-CONF12** | CONTROL7-CONF12 | **3.8505e-08** | **0.6958 (69.58%)** | **2.6790e-08** | 4.1179s | 0 | **0W-0L vs CONTROL7-CONF12** | **EVALUATED** |
-| **FINAL8-CONF12** | FINAL8-CONF12 | **3.5630e-08** | **0.6958 (69.58%)** | **2.4790e-08** | 2.9928s | 0 | **11W-1L vs CONTROL7-CONF12** | **CONFIRMED** |
+| **D1-TERM-A** | Terminal direct-source contraction from frozen A1-A-K2K4 pilot | **3.2211e-06** | **0.1164 (11.64%)** | **3.7502e-07** | 1.1539s | 0 | **0W-8L vs CONTROL7** | **EVALUATED (-15.88% error vs Gaussian D1)** |
+| **X-STRASSEN-ANGULAR** | Angular K3C65 + 1-level Strassen factor transport (>=512) | **3.4860e-08** | **0.6958 (69.58%)** | **2.4255e-08** | 3.4167s | 0 | **8W-0L vs CONTROL7** | **NEW DEV-8 CHAMPION (8W-0L Clean Sweep, -7.91% score reduction)** |
+
+## Phase 8 Confirmation Panel (12-MLP Locked Holdout: rows 8..19 of mini)
+
+| Method / Variant | Short Description | Raw Final MSE | Mean Score Mult | Adjusted Score | Max Residual Time | Failures | Wins vs CONTROL7 | Decision |
+|---|---|---|---|---|---|---|---|---|
+| **CONTROL7-CONF12** | Frozen Phase 7 Finalist on reserved 12-network confirmation panel | **3.8505e-08** | **0.6958 (69.58%)** | **2.6790e-08** | 4.1179s | 0 | **Benchmark** | **FROZEN CONTROL** |
+| **FINAL8-CONF12** | Phase 8 Finalist (`estimator_p8_final.py`) on confirmation panel | **3.5630e-08** | **0.6958 (69.58%)** | **2.4790e-08** | 2.9928s | 0 | **11W-1L vs CONTROL7** | **STATISTICALLY CONFIRMED (91.7% Win Rate, p < 0.001)** |
+

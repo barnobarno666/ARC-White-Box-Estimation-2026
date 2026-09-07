@@ -516,7 +516,7 @@ def run_candidate_eval(
         "offset": offset,
         "status": status,
         "panel": panel,
-        "n_mlps": n_mlps,
+        "n_mlps": metrics["n_mlps"],
         "official_failures": official_fails,
         "captured_metrics": metrics,
         "official_results_file": str(out_json_path),

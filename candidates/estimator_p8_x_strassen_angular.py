@@ -16,7 +16,19 @@ try:
 except Exception:
     pass
 
-A1_CONST = 0.9997558892211914
+A1_MAP = {
+    3: 0.92131773,
+    4: 0.94031597,
+    5: 0.95153286,
+    8: 0.96931070,
+    16: 0.98450641,
+    32: 0.99221920,
+    64: 0.99610153,
+    128: 0.99804880,
+    256: 0.99902393,
+    512: 0.99951184,
+    1024: 0.99975589,
+}
 
 
 def _wick_base(mean, var):
@@ -119,6 +131,7 @@ class Estimator(BaseEstimator):
         is_angular = True
         use_k4 = True
         k3_mode = "c65"
+        a1_const = float(A1_MAP.get(n, 1.0 - 0.25 / n))
 
         # Initial state setup
         if is_angular:
@@ -195,7 +208,7 @@ class Estimator(BaseEstimator):
 
                 # Final representation conversion
                 if is_angular:
-                    mu_out = mu * A1_CONST
+                    mu_out = mu * a1_const
                 else:
                     mu_out = mu
 
@@ -348,8 +361,8 @@ class Estimator(BaseEstimator):
 
             # Layer 0 exact conversion for angular
             if l == 0 and is_angular:
-                mu = mu / A1_CONST
-                cov = cov - (1.0 / (A1_CONST**2) - 1.0) * (k1[:, None] * k1[None, :])
+                mu = mu / a1_const
+                cov = cov - (1.0 / (a1_const**2) - 1.0) * (k1[:, None] * k1[None, :])
                 cov = _sym(cov)
 
             if use_k4:
@@ -375,6 +388,6 @@ class Estimator(BaseEstimator):
             else:
                 c4 = 0.0
 
-            preds.append(mu * A1_CONST if is_angular else mu)
+            preds.append(mu * a1_const if is_angular else mu)
 
         return fnp.stack(preds, axis=0)

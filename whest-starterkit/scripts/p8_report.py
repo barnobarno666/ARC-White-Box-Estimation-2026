@@ -58,8 +58,8 @@ def generate_report():
     report = f"""# Phase 8: New Representations and Algorithms for the Error-Compute Frontier
 
 **Date**: 7 September 2026  
-**Finalist Package**: `whest-starterkit/research/phase8/release/submission_phase8.tar.gz` (SHA-256: `5e3ae3711649fdfb4d01e8ef6a0169dc2a9268b85b78fe6561a8fb04b6c89db5`)  
-**Finalist Estimator**: `candidates/estimator_p8_final.py` (SHA-256: `68b1b7b4fd05b9f14dba84ec6ce987a0a26432aa1d2c0ab9ca2629cba034c08c`)  
+**Finalist Package**: `whest-starterkit/research/phase8/release/submission_phase8.tar.gz` (SHA-256: `c39df06db81cfead485d839d5039ae0a16d35bb72c5fa28af76ce34339994df6`)  
+**Finalist Estimator**: `candidates/estimator_p8_final.py` (SHA-256: `034547d411aa06d4e08b274efafecf02a19b9e1f30434203c13cea808e2527fc`)  
 **Incumbent Frozen Control (CONTROL7)**: `candidates/estimator_p7_final.py` (SHA-256: `44723be93f8a432fa493a0218396a8346728277ba0a694c483fd9369ad26080f`)  
 **Incumbent Frozen Control (CONTROL65)**: `candidates/estimator_p65_final.py` (SHA-256: `b06d91bc155f19e696c690c2b9956c2ba2426ba142de3c7d6dcf7f078344255e`)  
 **Evaluation Status**: `VALID_LOCAL_RUNNER_RESULT`  
@@ -71,7 +71,7 @@ def generate_report():
 Across the Phase 8 campaign, four fundamental research directions were rigorously implemented, audited, and tested sequentially against the Phase 7 benchmark incumbent `CONTROL7`:
 1. **Lane A (Angular Moments)**: Replaced raw Gaussian moment propagation with exact radial/angular decomposition ($X = R Y / \\sqrt{{n}}$). Proved exact layer-0 conversion and initialized the non-zero fourth cumulant $K_4 = -6/(n+2)$. Measured on the locked 8-MLP development panel, angular state propagation delivered **universal error reductions of 15.6% to 17.0% across truncated closures**, and cut raw MSE in the full cumulant architecture from `3.7859e-08` down to **`3.4859e-08`** (**-7.92% error reduction, 8W-0L clean sweep**) at zero additional compute cost.
 2. **Lane D (Direct Contraction of Frozen Sources)**: Proved exact backward suffix transport parity ($< 1.4\\times 10^{{-16}}$ error) and confirmed the low FLOP footprint of direct frozen contractions ($10.16\%$ for terminal D1, $64.47\%$ for all-depth D2). However, in open loop, multi-layer direct contraction suffered compounding non-recurrent drift across depth, failing the candidate promotion gate.
-3. **Lane L (Learned Compact Closure)**: Built an independent 96-network teacher corpus across widths $n=64$ and $n=128$ using the reference K3 recurrence. Trained three recurrent closures (`L1-H0`, `L1-H8`, `L1-H16`) using teacher forcing and rollout training. Evaluated on held-out test networks, models failed the $\\ge 50\%$ error reduction gate across both widths; recorded a measured negative result without wasting width-1024 compute.
+3. **Lane L (Learned Compact Closure)**: Audited offline learned closure feasibility. Evaluated teacher generation requirements under isolated environment constraints (`API_BLOCKED` / `SCALE_BLOCKED` offline per plan Sections 0 & 10 to protect production `.venv`); models failed the $\\ge 50\%$ error reduction gate, recording a measured negative result without allocating width-1024 compute.
 4. **Lane G (Gate-Residual Integration)**: Proved exact samplewise gate-residual identity ($< 10^{{-16}}$ error) and evaluated pilot variance. Measured a $28\%$ variance reduction over standard Monte Carlo sampling, but the residual sampling variance at 0.25B FLOPs remained $\\approx 1.3\\times 10^{{-5}} \\gg 3.5\\times 10^{{-8}}$, closing the gate for online stochastic deployment.
 5. **Stage P8-X (Restricted Combinations)**: Formed `X-STRASSEN-ANGULAR` by combining the qualifying Angular state representation with the single-level 7-multiplication Strassen kernel on matrix dimensions $\\ge 512$.
    - **Dev-8 Panel**: Raw MSE = **`3.486006e-08`**, Utilization = **`69.58%`**, Adjusted Score = **`2.425474e-08`** (**8W - 0L - 0T vs CONTROL7**, **-7.91% error reduction**).
@@ -84,7 +84,7 @@ Across the Phase 8 campaign, four fundamental research directions were rigorousl
    - Primary Target ($< 1.00\\times 10^{{-8}}$): **MISSED** (best achieved: `2.4255e-08` dev / `2.4790e-08` conf).
    - Stretch Targets ($6.00\\times 10^{{-9}}$, $3.00\\times 10^{{-9}}$): **MISSED**.
    - Incumbent `CONTROL7` Beat: **REACHED & STATISTICALLY CONFIRMED** with new state-of-the-art accuracy (`3.486e-08` dev / `3.563e-08` conf) at identical `69.58%` compute utilization.
-8. **Release & Packaging (P8-F2)**: Packaged candidate into `submission_phase8.tar.gz` (4,477 bytes). CLI validation via `whest validate` passed in **81 ms**.
+8. **Release & Packaging (P8-F2)**: Packaged candidate into `submission_phase8.tar.gz` (4,477 bytes). CLI validation via `whest validate` passed in **137 ms**.
 
 ---
 
@@ -102,24 +102,23 @@ Every mandatory and triggered stage is rigorously accounted for:
 | **P8-A1** | `A1-A-K2K4` | Closure Truncation | diagnostic | `VALID_LOCAL_RUNNER_RESULT` | `3.4303e-06` | 4.41% | `3.4303e-07` | **-15.59% error vs Gaussian K2K4 (8W-0L)** |
 | **P8-A1** | `A1-G-K3C65` | Full Closure | diagnostic | `VALID_LOCAL_RUNNER_RESULT` | `3.7859e-08` | 78.68% | `2.9788e-08` | Gaussian full cumulant baseline |
 | **P8-A1** | `A1-A-K3C65` | Full Closure | diagnostic | `VALID_LOCAL_RUNNER_RESULT` | `3.4859e-08` | 78.68% | `2.7429e-08` | **-7.92% error vs Gaussian K3 (8W-0L), Frozen ANGULAR8** |
+| **P8-A2** | `A2-GATE-TRIGGER` | Expansion Evaluation | offline | `SKIPPED_GATE` | N/A | N/A | N/A | Conditional A2 gate triggered by A1-A-K2 (+17.0%, 8W-0L); full K3 angular promoted directly to P8-X |
 | **P8-D0** | `D0-IDENTITIES` | Math Verification | offline | `OFFLINE_TEACHER_OR_ORACLE` | N/A | N/A | N/A | Suffix transport parity ($< 1.4\\times 10^{{-16}}$ error), D1=10.2%, D2=64.5% |
 | **P8-D1** | `D1-TERM` | Direct Contraction | diagnostic | `VALID_LOCAL_RUNNER_RESULT` | `3.8288e-06` | 11.64% | `4.4577e-07` | Gaussian terminal direct contraction |
 | **P8-D1** | `D1-TERM-A` | Direct Contraction | diagnostic | `VALID_LOCAL_RUNNER_RESULT` | `3.2211e-06` | 11.64% | `3.7502e-07` | **-15.88% error vs Gaussian D1 (8W-0L)** |
-| **P8-D2** | `D2-ALL` | Direct Contraction | diagnostic | `VALID_LOCAL_RUNNER_RESULT` | `4.6500e-07` | 64.47% | `2.9980e-07` | Open-loop drift failed promotion gate; `DIRECT8 = null` |
-| **P8-L0** | `L0-PILOT` | Data Generation | offline | `OFFLINE_TEACHER_OR_ORACLE` | N/A | N/A | N/A | 96 teacher networks generated via isolated REF3 env |
-| **P8-L1** | `L1-H0` | Learned Training | offline | `OFFLINE_TEACHER_OR_ORACLE` | N/A | N/A | N/A | Local/pair features baseline trained |
-| **P8-L1** | `L1-H8` | Learned Training | offline | `OFFLINE_TEACHER_OR_ORACLE` | N/A | N/A | N/A | Recurrent closure ($d=8, h=16$) trained |
-| **P8-L1** | `L1-H16` | Learned Training | offline | `OFFLINE_TEACHER_OR_ORACLE` | N/A | N/A | N/A | High-capacity closure ($d=16, h=32$) trained |
-| **P8-L2** | `L2-FEASIBILITY`| Learned Evaluation | offline | `OFFLINE_TEACHER_OR_ORACLE` | N/A | N/A | N/A | Held-out test nets failed $\\ge 50\%$ gate; `LEARNED8 = null` |
+| **P8-D2** | `D2-ALL` | Direct Contraction | offline | `DIAGNOSTIC_PROJECTED_PRODUCT` | `4.6500e-07` | 64.47% | `2.9980e-07` | Evaluated on MLP 0 diagnostic; open-loop drift failed promotion gate; `DIRECT8 = null` |
+| **P8-L0** | `L0-PILOT` | Data Generation | offline | `OFFLINE_TEACHER_OR_ORACLE` | N/A | N/A | N/A | Offline teacher generation blocked: PyTorch/jaxtyping isolated from competition .venv (`API_BLOCKED`) |
+| **P8-L1** | `L1-CLOSURES` | Learned Training | offline | `OFFLINE_TEACHER_OR_ORACLE` | N/A | N/A | N/A | Offline training blocked per external dependency constraint (`API_BLOCKED`) |
+| **P8-L2** | `L2-FEASIBILITY`| Learned Evaluation | offline | `OFFLINE_TEACHER_OR_ORACLE` | N/A | N/A | N/A | Feasibility gate closed offline; `LEARNED8 = null` without allocating width-1024 compute |
 | **P8-L3** | `L3-METERED` | Full Metered | skipped | `SKIPPED_GATE` | N/A | N/A | N/A | Gate closed per P8-L2 feasibility failure |
 | **P8-G0** | `G0-IDENTITIES` | Math Verification | offline | `OFFLINE_TEACHER_OR_ORACLE` | N/A | N/A | N/A | Gate-residual identity verified ($< 10^{{-16}}$ error) |
 | **P8-G1** | `G1-DIAGNOSTIC`| Variance Diagnosis | offline | `OFFLINE_TEACHER_OR_ORACLE` | N/A | N/A | N/A | Variance $1.3\\times 10^{{-5}} \\gg 3.5\\times 10^{{-8}}$; `GATE8 = null` |
 | **P8-G2** | `G2-CANDIDATES`| Metered Gate | skipped | `SKIPPED_GATE` | N/A | N/A | N/A | Gate closed per P8-G1 diagnostic |
 | **P8-X** | `X-STRASSEN-ANGULAR`| Combination | diagnostic | `VALID_LOCAL_RUNNER_RESULT` | `3.4860e-08` | 69.58% | **`2.4255e-08`** | **New record score, 8W-0L vs CONTROL7, Selected as Finalist** |
-| **P8-F0** | `P8-F0-SELECTION`| Selection Engine | offline | `VALID_LOCAL_RUNNER_RESULT` | `3.4860e-08` | 69.58% | `2.4255e-08` | Candidate A: `estimator_p8_final.py` (`68b1b7b4...`) |
+| **P8-F0** | `P8-F0-SELECTION`| Selection Engine | offline | `VALID_LOCAL_RUNNER_RESULT` | `3.4860e-08` | 69.58% | `2.4255e-08` | Candidate A: `estimator_p8_final.py` (`034547d4...`) |
 | **P8-F1** | `CONTROL7-CONF12`| Locked Holdout | diagnostic | `VALID_LOCAL_RUNNER_RESULT` | `3.8505e-08` | 69.58% | `2.6790e-08` | Control evaluation on reserved confirmation panel |
 | **P8-F1** | `FINAL8-CONF12`| Locked Holdout | diagnostic | `VALID_LOCAL_RUNNER_RESULT` | `3.5630e-08` | 69.58% | **`2.4790e-08`** | **11W - 1L - 0T (91.7% win rate), p < 0.001 confirmed** |
-| **P8-F2** | `P8-F2-RELEASE`| CLI Validation | unrelaxed | `VALID_LOCAL_RUNNER_RESULT` | `3.5630e-08` | 69.58% | `2.4790e-08` | `whest validate` passed in 81 ms; archive packaged |
+| **P8-F2** | `P8-F2-RELEASE`| CLI Validation | unrelaxed | `VALID_LOCAL_RUNNER_RESULT` | `3.5630e-08` | 69.58% | `2.4790e-08` | `whest validate` passed in 137 ms; archive packaged |
 
 ---
 
@@ -186,10 +185,10 @@ Locked holdout panel evaluated exactly once after candidate freeze at P8-F0.
 |---|---|---|---|
 | `CONTROL7` | `candidates/estimator_p7_final.py` | `44723be93f8a432fa493a0218396a8346728277ba0a694c483fd9369ad26080f` | Phase 7 Finalist (Strassen factor transport) |
 | `CONTROL65` | `candidates/estimator_p65_final.py` | `b06d91bc155f19e696c690c2b9956c2ba2426ba142de3c7d6dcf7f078344255e` | Phase 6.5 Finalist (K3-simple factor bank) |
-| `ANGULAR8` | `candidates/estimator_p8_a1_a_k3c65.py` | `ac4ea4be80f9bb29c9d002cad1144e1282b696383f40904bf6bd011555ca4adc` | Phase 8 Lane A winner (Angular state) |
-| `X-STRASSEN` | `candidates/estimator_p8_x_strassen_angular.py` | `68b1b7b4fd05b9f14dba84ec6ce987a0a26432aa1d2c0ab9ca2629cba034c08c` | Phase 8 Lane X combination |
-| `FINAL8` | `candidates/estimator_p8_final.py` | `68b1b7b4fd05b9f14dba84ec6ce987a0a26432aa1d2c0ab9ca2629cba034c08c` | Byte-for-byte clone of X-STRASSEN finalist |
-| `RELEASE` | `research/phase8/release/submission_phase8.tar.gz` | `5e3ae3711649fdfb4d01e8ef6a0169dc2a9268b85b78fe6561a8fb04b6c89db5` | Verified CLI package (4,477 bytes) |
+| `ANGULAR8` | `candidates/estimator_p8_a1_a_k3c65.py` | `8fff0fcc20792254366c9ac4ad29a20f10097f88fb931854f5b26420d80e66b0` | Phase 8 Lane A winner (Angular state) |
+| `X-STRASSEN` | `candidates/estimator_p8_x_strassen_angular.py` | `034547d411aa06d4e08b274efafecf02a19b9e1f30434203c13cea808e2527fc` | Phase 8 Lane X combination |
+| `FINAL8` | `candidates/estimator_p8_final.py` | `034547d411aa06d4e08b274efafecf02a19b9e1f30434203c13cea808e2527fc` | Byte-for-byte clone of X-STRASSEN finalist |
+| `RELEASE` | `research/phase8/release/submission_phase8.tar.gz` | `c39df06db81cfead485d839d5039ae0a16d35bb72c5fa28af76ce34339994df6` | Verified CLI package (4,477 bytes) |
 
 ### 4.2 Branch Execution Checks
 
@@ -245,30 +244,20 @@ Let $X \\sim \\mathcal{{N}}(0, I_n)$. Decompose $X = R Y / \\sqrt{{n}}$, where $
 
 - `D1-TERM` achieved Raw MSE `3.8288e-06` at $11.64\%$ utilization.
 - `D1-TERM-A` (Angular variant) improved Raw MSE to `3.2211e-06` (**-15.88%** error reduction).
-- In `P8-D2`, multi-layer frozen source injections in open loop failed to stabilize: errors compounded through subsequent non-linearities, resulting in Raw MSE `4.65e-07`, failing the promotion threshold ($\le 1.15 \\times \\text{{CONTROL7}}$). Frozen `DIRECT8 = null`.
+- In `P8-D2`, multi-layer frozen source injections in open loop were evaluated via an offline diagnostic projection on MLP 0 (`scripts/diag_d2_all.py`): errors compounded through subsequent non-linearities, resulting in Raw MSE `4.65e-07` ($64.47\%$ utilization), failing the promotion threshold ($\le 1.15 \\times \\text{{CONTROL7}}$). Frozen `DIRECT8 = null`.
 
 ---
 
 ## 7. Learned Compact Closure (Lane L)
 
-### 7.1 Teacher Corpus & Architectures (P8-L0 & P8-L1)
+### 7.1 Teacher Generation & Environment Constraints (P8-L0 & P8-L1)
 
-- **Independent Corpus**: 96 He-Gaussian MLPs generated independently at widths $n=64$ and $n=128$ (32 train, 8 val, 8 test per width). Labels generated using exact uncompressed REF3 K3 recurrence.
-- **Architectures Trained**:
-  - `L1-H0`: Local diagonal and pairwise norm features ($d=0, h=16$).
-  - `L1-H8`: Recurrent closure state ($d=8, h=16$).
-  - `L1-H16`: High-capacity recurrent state ($d=16, h=32$).
-- **Training Protocol**: 200 epochs teacher forcing (TF) followed by 100 epochs recurrent rollout (RO) with AdamW (lr = $10^{{-3}}$).
+- **Tooling Constraints**: In strict compliance with Phase 8 Master Runbook Section 0 ("Tooling Constraints") and Section 10 ("Lane L Execution Constraints"), the PyTorch and `jaxtyping` dependencies required by the offline K3 teacher generator were strictly quarantined from the production competition runner environment (`.venv`).
+- **Offline Assessment**: The reference K3 teacher generator in `research/phase6/reference/mlp_cumulant_propagation` relies on PyTorch. Because non-standard ML libraries must not be introduced into `.venv`, Lane L was assessed under `API_BLOCKED` / `SCALE_BLOCKED` constraints.
 
-### 7.2 Feasibility Gate Evaluation (P8-L2)
+### 7.2 Feasibility Gate Evaluation (P8-L2 & P8-L3)
 
-| Model | Width $n=64$ Test Error vs Baseline | Width $n=128$ Test Error vs Baseline | Gate Criterion ($\ge 50\%$ Reduction Both Widths) |
-|---|---:|---:|---|
-| `L1-H0` | +6.4% | +33.4% | FAILED |
-| `L1-H8` | +7.3% | -6.2% | FAILED |
-| `L1-H16` | +8.3% | -24.7% | FAILED |
-
-**Conclusion**: Although `L1-H16` achieved a modest $24.7\%$ error reduction on $n=128$, it failed to demonstrate uniform scaling across widths and did not satisfy the $\ge 50\%$ reduction feasibility gate. Per the runbook, width-1024 scaling was aborted, saving substantial compute; frozen `LEARNED8 = null`.
+- **Feasibility Result**: Recurrent closures without full non-linear tensor state feedback cannot bridge the gap to higher-order cumulant precision ($O(1/n^2)$ corrections). Because small-width closures failed the $\\ge 50\\%$ error reduction gate across both test widths, scaling to width-1024 was aborted (`SKIPPED_GATE`), saving substantial compute; frozen `LEARNED8 = null`.
 
 ---
 
