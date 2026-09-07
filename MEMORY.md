@@ -119,6 +119,7 @@ The current champion control is deployed in [whest-starterkit/estimator.py](whes
 * Phase 6 Champion (#330018): **`4.3500e-08`** (Raw MSE `6.82e-08`, utilization `63.73%`, cumulant propagation K3-simple)
 * Phase 6.5 Champion (#330088): **`2.9784e-08`** (Raw MSE `3.7854e-08`, utilization `78.68%`, L10-p10 schedule)
 * Phase 7 Champion (#330160): **`2.5335e-08`** (Official Graded Score: `2.53348e-08`, Raw MSE `3.7853e-08`, utilization `69.58%`, full 1-level Strassen on factor transport + repeated slices)
+* Phase 8 Champion (#330178): **`2.3053e-08`** (Official Graded Score: `2.30529e-08`, utilization `69.58%`, Angular moment propagation + 1-level Strassen factor transport)
 
 ---
 

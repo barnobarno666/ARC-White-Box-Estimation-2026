@@ -1,4 +1,4 @@
-CURRENT SUBMISSION ID: #330160 (https://www.aicrowd.com/challenges/arc-white-box-estimation-challenge-2026/submissions/330160) [Phase 7 Finalist P7-02b-strassen1 / estimator_p7_final.py, official score 2.5335e-08] | Prev Graded #330088, #330018 (official score 4.35e-08, raw MSE 6.82e-08, util 63.73%), #330015 (7.1370e-08), #330016 (7.5121e-08)
+CURRENT SUBMISSION ID: #330178 (https://www.aicrowd.com/challenges/arc-white-box-estimation-challenge-2026/submissions/330178) [Phase 8 Finalist X-STRASSEN-ANGULAR / estimator_p8_final.py, official score 2.3053e-08] | Prev Graded #330160 (official score 2.5335e-08), #330088, #330018 (4.35e-08), #330015 (7.1370e-08), #330016 (7.5121e-08)
 CURRENT BEST LOCAL VALIDATION SCORE: 2.4255e-08 (Phase 8 Finalist X-STRASSEN-ANGULAR / estimator_p8_final.py — 8W-0L CLEAN SWEEP VS CONTROL7, -7.91% SCORE REDUCTION, UTILIZATION 69.58%)
 score to beat: 2.6337e-08 (Phase 7 finalist CONTROL7) -> ACHIEVED 2.4255e-08 (Raw MSE 3.4860e-08, Util 69.58%, -7.91% adjusted score reduction; Conf-12 Score 2.4790e-08, 11W-1L)
 

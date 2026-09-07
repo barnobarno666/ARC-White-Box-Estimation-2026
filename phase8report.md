@@ -28,6 +28,7 @@ Across the Phase 8 campaign, four fundamental research directions were rigorousl
    - Stretch Targets ($6.00\times 10^{-9}$, $3.00\times 10^{-9}$): **MISSED**.
    - Incumbent `CONTROL7` Beat: **REACHED & STATISTICALLY CONFIRMED** with new state-of-the-art accuracy (`3.486e-08` dev / `3.563e-08` conf) at identical `69.58%` compute utilization.
 8. **Release & Packaging (P8-F2)**: Packaged candidate into `submission_phase8.tar.gz` (4,477 bytes). CLI validation via `whest validate` passed in **137 ms**.
+9. **Official AIcrowd Submission**: Submitted finalist archive as **Submission #330178** (URL: `https://www.aicrowd.com/challenges/arc-white-box-estimation-challenge-2026/submissions/330178`). **Official Graded Score: `2.30529e-08`** (Status: `OFFICIAL_SUBMISSION_RESULT`), achieving a new personal best and outperforming Phase 7 Champion #330160 (`2.5335e-08`) by **-9.01%**.
 
 ---
 
@@ -62,6 +63,7 @@ Every mandatory and triggered stage is rigorously accounted for:
 | **P8-F1** | `CONTROL7-CONF12`| Locked Holdout | diagnostic | `VALID_LOCAL_RUNNER_RESULT` | `3.8505e-08` | 69.58% | `2.6790e-08` | Control evaluation on reserved confirmation panel |
 | **P8-F1** | `FINAL8-CONF12`| Locked Holdout | diagnostic | `VALID_LOCAL_RUNNER_RESULT` | `3.5630e-08` | 69.58% | **`2.4790e-08`** | **11W - 1L - 0T (91.7% win rate), p < 0.001 confirmed** |
 | **P8-F2** | `P8-F2-RELEASE`| CLI Validation | unrelaxed | `VALID_LOCAL_RUNNER_RESULT` | `3.5630e-08` | 69.58% | `2.4790e-08` | `whest validate` passed in 137 ms; archive packaged |
+| **P8-F2** | `P8-F2-SUBMISSION`| AIcrowd Grader | graded | `OFFICIAL_SUBMISSION_RESULT` | N/A | 69.58% | **`2.3053e-08`** | **Official Submission #330178 Graded: `2.30529e-08`** |
 
 ---
 
@@ -264,3 +266,12 @@ The empirical error-compute frontier across all tested paradigms:
 
 ---
 *Report generated strictly pursuant to Section 17 of Phase 8 Master Runbook. All source files, fixtures, and checkpoints preserved in `research/phase8/`.*
+
+### Stage P8-G0/G1 Results: Exact Gate Decomposition & Variance Diagnostics
+- **Exact Samplewise Decomposition Parity**: Relative error `< 1e-15` confirmed.
+- **Exact Analytic Source $l=0$**: $\mathbb{E}[r_0] = \|W_0^T\| / \sqrt{2\pi}$ exact; output contribution $Q_0 \mathbb{E}[r_0]$ computed with zero sampling variance.
+- **Measured Variances Across 8 Dev MLPs**:
+  - Full Output Variance (Ordinary Sampling): `7.9207e-02`
+  - Transported Residual Variance (Layers 1..15 Sum): `8.0724e-01` (Variance reduction: `-919.16%`)
+  - Shared-Prefix Group Variances: `['4.703e-01', '1.787e-01', '7.165e-02', '3.671e-02']`
+- **G1 Expansion Gate vs CONTROL7 Target (1.8436e-08)**: CLOSED (Insufficient variance reduction to beat CONTROL7 at <=0.25B)
