@@ -1,0 +1,154 @@
+{
+  "mandatory_rows": [
+    {
+      "stage": "P8-00",
+      "exp_id": "CONTROL7",
+      "status": "COMPLETED",
+      "result": "Raw MSE 3.8017e-08, Util 69.58%, Score 2.6451e-08 (Dev 0 parity confirmed)"
+    },
+    {
+      "stage": "P8-A0",
+      "exp_id": "A0-IDENTITIES",
+      "status": "COMPLETED",
+      "result": "Radial/angular factorization, C=I, K4=-6/(n+2), exact layer-0 conversion verified"
+    },
+    {
+      "stage": "P8-A1",
+      "exp_id": "A1-G-K2",
+      "status": "COMPLETED",
+      "result": "Score 4.1257e-07, Util 4.36%"
+    },
+    {
+      "stage": "P8-A1",
+      "exp_id": "A1-A-K2",
+      "status": "COMPLETED",
+      "result": "Score 3.4236e-07, Util 4.36% (-17.02% error vs Gaussian, 8W-0L)"
+    },
+    {
+      "stage": "P8-A1",
+      "exp_id": "A1-G-K2K4",
+      "status": "COMPLETED",
+      "result": "Score 4.0639e-07, Util 4.41%"
+    },
+    {
+      "stage": "P8-A1",
+      "exp_id": "A1-A-K2K4",
+      "status": "COMPLETED",
+      "result": "Score 3.4303e-07, Util 4.41% (-15.59% error vs Gaussian, 8W-0L)"
+    },
+    {
+      "stage": "P8-A1",
+      "exp_id": "A1-G-K3C65",
+      "status": "COMPLETED",
+      "result": "Score 2.9788e-08, Util 78.68%, Raw MSE 3.7859e-08"
+    },
+    {
+      "stage": "P8-A1",
+      "exp_id": "A1-A-K3C65",
+      "status": "COMPLETED",
+      "result": "Score 2.7429e-08, Util 78.68%, Raw MSE 3.4859e-08 (-7.92% error, 8W-0L vs G-K3)"
+    },
+    {
+      "stage": "P8-D0",
+      "exp_id": "D0-IDENTITIES",
+      "status": "COMPLETED",
+      "result": "Backward suffix transport parity verified (< 1.4e-16 err), cost forecast D1: 10.16%, D2: 64.47%"
+    },
+    {
+      "stage": "P8-D1",
+      "exp_id": "D1-TERM",
+      "status": "COMPLETED",
+      "result": "Score 4.4577e-07, Util 11.64%"
+    },
+    {
+      "stage": "P8-D1",
+      "exp_id": "D1-TERM-A",
+      "status": "COMPLETED",
+      "result": "Score 3.7502e-07, Util 11.64% (-15.88% error vs Gaussian D1)"
+    },
+    {
+      "stage": "P8-D2",
+      "exp_id": "D2-ALL",
+      "status": "COMPLETED",
+      "result": "88.2% open-loop error capture; non-recurrent drift failed promotion gate, frozen DIRECT8 = null"
+    },
+    {
+      "stage": "P8-L0",
+      "exp_id": "L0-PILOT",
+      "status": "COMPLETED",
+      "result": "96 teacher shards generated at n=64 and n=128 using isolated REF3 .venv_ref"
+    },
+    {
+      "stage": "P8-L1",
+      "exp_id": "L1-H0",
+      "status": "COMPLETED",
+      "result": "Trained local/pair features baseline"
+    },
+    {
+      "stage": "P8-L1",
+      "exp_id": "L1-H8",
+      "status": "COMPLETED",
+      "result": "Trained recurrent closure (d=8, h=16) with TF + RO stages"
+    },
+    {
+      "stage": "P8-L1",
+      "exp_id": "L1-H16",
+      "status": "COMPLETED",
+      "result": "Trained high-capacity recurrent closure (d=16, h=32)"
+    },
+    {
+      "stage": "P8-L2",
+      "exp_id": "L2-FEASIBILITY",
+      "status": "COMPLETED",
+      "result": "Evaluated held-out test nets: failed >=50% reduction gate across both widths; LEARNED8 = null"
+    },
+    {
+      "stage": "P8-L3",
+      "exp_id": "L3-METERED",
+      "status": "SKIPPED_GATE",
+      "result": "Gate closed per P8-L2 feasibility gate failure"
+    },
+    {
+      "stage": "P8-G0",
+      "exp_id": "G0-IDENTITIES",
+      "status": "COMPLETED",
+      "result": "Exact gate-residual samplewise identity verified (< 1e-16 err)"
+    },
+    {
+      "stage": "P8-G1",
+      "exp_id": "G1-DIAGNOSTIC",
+      "status": "COMPLETED",
+      "result": "28% variance reduction measured, but residual sampling variance 1.3e-5 >> 3.5e-8 cumulant level; GATE8 = null"
+    },
+    {
+      "stage": "P8-G2",
+      "exp_id": "G2-CANDIDATES",
+      "status": "SKIPPED_GATE",
+      "result": "Gate closed per P8-G1 diagnostic (sampling variance exceeds target MSE)"
+    },
+    {
+      "stage": "P8-X",
+      "exp_id": "P8-X-COMBINATIONS",
+      "status": "COMPLETED",
+      "result": "X-STRASSEN-ANGULAR: Raw MSE 3.4860e-08, Util 69.58%, Score 2.4255e-08 (8W-0L vs CONTROL7)"
+    },
+    {
+      "stage": "P8-F0",
+      "exp_id": "P8-F0-SELECTION",
+      "status": "COMPLETED",
+      "result": "Candidate A frozen: estimator_p8_final.py (SHA: 68b1b7b4...)"
+    },
+    {
+      "stage": "P8-F1",
+      "exp_id": "P8-F1-CONFIRMATION",
+      "status": "COMPLETED",
+      "result": "FINAL8-CONF12: Raw MSE 3.5630e-08, Util 69.58%, Score 2.4790e-08 (11W-1L vs CONTROL7, p < 0.001)"
+    },
+    {
+      "stage": "P8-F2",
+      "exp_id": "P8-F2-RELEASE",
+      "status": "COMPLETED",
+      "result": "Validated with official CLI (81 ms) and packaged into submission_phase8.tar.gz (SHA: 5e3ae371...)"
+    }
+  ]
+}

@@ -1,0 +1,127 @@
+{
+  "panel_size": 12,
+  "total_requested": 16,
+  "limitation_note": "Dataset contains 20 rows total. Exactly 12 confirmation networks registered (rows 8..19).",
+  "networks": [
+    {
+      "order": 0,
+      "dataset_row_index": 8,
+      "name": "justin-johnson",
+      "width": 1024,
+      "depth": 16,
+      "seed": 2419417056,
+      "weights_sha256": "9b03a5ffb30e7bd848285d6dd75abb78fc8736f42586e680c0f1a85b4e020c92",
+      "status": "LOCKED"
+    },
+    {
+      "order": 1,
+      "dataset_row_index": 9,
+      "name": "christina-lopez",
+      "width": 1024,
+      "depth": 16,
+      "seed": 727100163,
+      "weights_sha256": "3af7229b6cc196af031c1b410c13a9d81447abcc60f5dae1f389facd46f83113",
+      "status": "LOCKED"
+    },
+    {
+      "order": 2,
+      "dataset_row_index": 10,
+      "name": "randy-murray",
+      "width": 1024,
+      "depth": 16,
+      "seed": 2677534292,
+      "weights_sha256": "162043ae9c0308d74edb31fb741014cbc27b7639bf158973ac327cf295fdab54",
+      "status": "LOCKED"
+    },
+    {
+      "order": 3,
+      "dataset_row_index": 11,
+      "name": "john-koch",
+      "width": 1024,
+      "depth": 16,
+      "seed": 2953942074,
+      "weights_sha256": "8bafd8955b409fddeafe3d2e63550b8c681ab213107636cba4f6954d171487b7",
+      "status": "LOCKED"
+    },
+    {
+      "order": 4,
+      "dataset_row_index": 12,
+      "name": "susan-butler",
+      "width": 1024,
+      "depth": 16,
+      "seed": 2846867145,
+      "weights_sha256": "8aebf2264c4d94d89067c65f8b09a9e05bdb22d3db43edd0d494a7b50f80d102",
+      "status": "LOCKED"
+    },
+    {
+      "order": 5,
+      "dataset_row_index": 13,
+      "name": "crystal-gonzales",
+      "width": 1024,
+      "depth": 16,
+      "seed": 1739439673,
+      "weights_sha256": "3630b845d5287993e9a5d103976ab0e19dd788adf5f64fe6014a90733727febe",
+      "status": "LOCKED"
+    },
+    {
+      "order": 6,
+      "dataset_row_index": 14,
+      "name": "troy-richardson",
+      "width": 1024,
+      "depth": 16,
+      "seed": 89174312,
+      "weights_sha256": "0959544a53a0b185b10fd2ef6c1fe4385e6a4d9515519f52864ab929ca7ba029",
+      "status": "LOCKED"
+    },
+    {
+      "order": 7,
+      "dataset_row_index": 15,
+      "name": "sharon-whitehead",
+      "width": 1024,
+      "depth": 16,
+      "seed": 4093880777,
+      "weights_sha256": "6c5958a695c24deb33c75cf0a7be9895e5edb4074016770f21461186b1515edf",
+      "status": "LOCKED"
+    },
+    {
+      "order": 8,
+      "dataset_row_index": 16,
+      "name": "kathleen-mueller",
+      "width": 1024,
+      "depth": 16,
+      "seed": 2465017175,
+      "weights_sha256": "8b684d06944e4b028dffc070b84d391a8430ea1ead701acf5723e9754c4bb169",
+      "status": "LOCKED"
+    },
+    {
+      "order": 9,
+      "dataset_row_index": 17,
+      "name": "michelle-kramer",
+      "width": 1024,
+      "depth": 16,
+      "seed": 3171416840,
+      "weights_sha256": "18c93a52095bf04d751ac5ee7194cd882f07a47e40f2a4dadf78f445cb217922",
+      "status": "LOCKED"
+    },
+    {
+      "order": 10,
+      "dataset_row_index": 18,
+      "name": "elizabeth-hughes",
+      "width": 1024,
+      "depth": 16,
+      "seed": 1087943600,
+      "weights_sha256": "81516d7ebccd7a595aa5506ec3d16d8c6b4cb6fe4cc1150d548143d7f6c5e5f3",
+      "status": "LOCKED"
+    },
+    {
+      "order": 11,
+      "dataset_row_index": 19,
+      "name": "kelsey-gonzalez",
+      "width": 1024,
+      "depth": 16,
+      "seed": 2829231500,
+      "weights_sha256": "f04b2a98755c21fa338a74fb40d41f480f03a4e8812fe3006cb496dbfe01015b",
+      "status": "LOCKED"
+    }
+  ]
+}

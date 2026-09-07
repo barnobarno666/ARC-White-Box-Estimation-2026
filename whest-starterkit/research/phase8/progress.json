@@ -1,0 +1,152 @@
+{
+  "phase": "8",
+  "started_at": "2026-09-07T11:55:00+06:00",
+  "active_stage": "COMPLETE",
+  "completed_stages": [
+    "P8-00",
+    "P8-A0",
+    "P8-A1",
+    "P8-D0",
+    "P8-D1",
+    "P8-D2",
+    "P8-L0",
+    "P8-L1",
+    "P8-L2",
+    "P8-G0",
+    "P8-G1",
+    "P8-X",
+    "P8-F0",
+    "P8-F1",
+    "P8-F2"
+  ],
+  "completed_experiments": {
+    "P8-00-ctrl7-smoke1": {
+      "timestamp": "20260907_120314",
+      "status": "RESEARCH_ONLY",
+      "mean_raw_final_mse": 3.801703644171671e-08,
+      "mean_compute_utilization": 0.6957719546471708,
+      "mean_adjusted_score": 2.6451187754945957e-08,
+      "candidate_sha256": "44723be93f8a432fa493a0218396a8346728277ba0a694c483fd9369ad26080f"
+    },
+    "A1-G-K2": {
+      "timestamp": "20260907_120624",
+      "status": "RESEARCH_ONLY",
+      "mean_raw_final_mse": 4.125685900224569e-06,
+      "mean_compute_utilization": 0.04359645397926215,
+      "mean_adjusted_score": 4.125685900224569e-07,
+      "candidate_sha256": "24f940ff6aeb217d5e19cd2e65d2a06bdd9b38fd07f10849838c5640fccbb4c8"
+    },
+    "A1-A-K2": {
+      "timestamp": "20260907_121348",
+      "status": "RESEARCH_ONLY",
+      "mean_raw_final_mse": 3.4236054451286337e-06,
+      "mean_compute_utilization": 0.04359884608129505,
+      "mean_adjusted_score": 3.423605445128634e-07,
+      "candidate_sha256": "db9157f1461bcb6c8e548d58feec6ec502f3151ccfe30259c11d53cf380a80af"
+    },
+    "A1-G-K2K4": {
+      "timestamp": "20260907_122058",
+      "status": "RESEARCH_ONLY",
+      "mean_raw_final_mse": 4.063923871611252e-06,
+      "mean_compute_utilization": 0.04410448904673103,
+      "mean_adjusted_score": 4.063923871611252e-07,
+      "candidate_sha256": "80ef44afeca27aae041d6f2d7851357a5f95409c30861bfa8fdeb64dbafd5c49"
+    },
+    "A1-A-K2K4": {
+      "timestamp": "20260907_122804",
+      "status": "RESEARCH_ONLY",
+      "mean_raw_final_mse": 3.4302800226047304e-06,
+      "mean_compute_utilization": 0.04410688114876393,
+      "mean_adjusted_score": 3.430280022604731e-07,
+      "candidate_sha256": "f15979b4b8ecd2652c8df0548b0031cf4130f81dd2e2430421c3beaa8bcc697b"
+    },
+    "A1-G-K3C65": {
+      "timestamp": "20260907_123525",
+      "status": "VALIDATED",
+      "mean_raw_final_mse": 3.785850610782404e-08,
+      "mean_compute_utilization": 0.786832216820585,
+      "mean_adjusted_score": 2.978829228633485e-08,
+      "candidate_sha256": "01bc4797438fb12cd2d46efa797d1a8234f93f63de63822c1d3ddef8cce9973e"
+    },
+    "A1-A-K3C65": {
+      "timestamp": "20260907_124723",
+      "status": "VALIDATED",
+      "mean_raw_final_mse": 3.4859498398986943e-08,
+      "mean_compute_utilization": 0.7868346089226179,
+      "mean_adjusted_score": 2.7428659790005515e-08,
+      "candidate_sha256": "ac4ea4be80f9bb29c9d002cad1144e1282b696383f40904bf6bd011555ca4adc"
+    },
+    "D1-TERM": {
+      "timestamp": "20260907_125801",
+      "status": "RESEARCH_ONLY",
+      "mean_raw_final_mse": 3.828835076546966e-06,
+      "mean_compute_utilization": 0.11642494404713943,
+      "mean_adjusted_score": 4.4577190955270535e-07,
+      "candidate_sha256": "1fac78b9f5f8accbab969bfdf528467d3d52d732631c475d2728cf33efcfa3ca"
+    },
+    "D1-TERM-A": {
+      "timestamp": "20260907_130515",
+      "status": "RESEARCH_ONLY",
+      "mean_raw_final_mse": 3.221092470084841e-06,
+      "mean_compute_utilization": 0.11642733614917233,
+      "mean_adjusted_score": 3.750232157821356e-07,
+      "candidate_sha256": "c202355d4ad4631ea3fa394d329deeeecb4bcc5bc6f962d175ae92e8911ef5a3"
+    },
+    "P8-X-strassen-angular-smoke1": {
+      "timestamp": "20260907_133604",
+      "status": "RESEARCH_ONLY",
+      "mean_raw_final_mse": 0.9434763193130493,
+      "mean_compute_utilization": 0.0,
+      "mean_adjusted_score": 0.9434763193130493,
+      "candidate_sha256": "469edb132fdb262d5eadd3fd6e12f0dd9d996215076153b50780c126b1cb9d03"
+    },
+    "P8-X-smoke2": {
+      "timestamp": "20260907_134807",
+      "status": "RESEARCH_ONLY",
+      "mean_raw_final_mse": 3.5130764075574916e-08,
+      "mean_compute_utilization": 0.6957743467492037,
+      "mean_adjusted_score": 2.444308442548353e-08,
+      "candidate_sha256": "469edb132fdb262d5eadd3fd6e12f0dd9d996215076153b50780c126b1cb9d03"
+    },
+    "X-STRASSEN-ANGULAR": {
+      "timestamp": "20260907_134943",
+      "status": "RESEARCH_ONLY",
+      "mean_raw_final_mse": 3.486006372455108e-08,
+      "mean_compute_utilization": 0.6957743467492037,
+      "mean_adjusted_score": 2.4254738065585143e-08,
+      "candidate_sha256": "68b1b7b4fd05b9f14dba84ec6ce987a0a26432aa1d2c0ab9ca2629cba034c08c"
+    },
+    "CONTROL7-CONF12": {
+      "timestamp": "20260907_140216",
+      "status": "RESEARCH_ONLY",
+      "mean_raw_final_mse": 3.850452312548214e-08,
+      "mean_compute_utilization": 0.6957719546471708,
+      "mean_adjusted_score": 2.6790367317773898e-08,
+      "candidate_sha256": "44723be93f8a432fa493a0218396a8346728277ba0a694c483fd9369ad26080f"
+    },
+    "FINAL8-CONF12": {
+      "timestamp": "20260907_143921",
+      "status": "RESEARCH_ONLY",
+      "mean_raw_final_mse": 3.5630018047072554e-08,
+      "mean_compute_utilization": 0.6957743467492037,
+      "mean_adjusted_score": 2.479045253136425e-08,
+      "candidate_sha256": "68b1b7b4fd05b9f14dba84ec6ce987a0a26432aa1d2c0ab9ca2629cba034c08c"
+    }
+  },
+  "frozen_parents": {
+    "CONTROL7": "44723be93f8a432fa493a0218396a8346728277ba0a694c483fd9369ad26080f",
+    "CONTROL65": "b06d91bc155f19e696c690c2b9956c2ba2426ba142de3c7d6dcf7f078344255e",
+    "ANGULAR8": "ac4ea4be80f9bb29c9d002cad1144e1282b696383f40904bf6bd011555ca4adc",
+    "FINAL8": "68b1b7b4fd05b9f14dba84ec6ce987a0a26432aa1d2c0ab9ca2629cba034c08c"
+  },
+  "best_candidate": {
+    "exp_id": "X-STRASSEN-ANGULAR",
+    "adjusted_score": 2.4254738065585143e-08,
+    "raw_mse": 3.486006372455108e-08,
+    "utilization": 0.6957743467492037,
+    "confirmation_score": 2.479045253136425e-08,
+    "candidate_sha256": "68b1b7b4fd05b9f14dba84ec6ce987a0a26432aa1d2c0ab9ca2629cba034c08c",
+    "submission_archive": "research/phase8/release/submission_phase8.tar.gz",
+    "submission_archive_sha256": "5e3ae3711649fdfb4d01e8ef6a0169dc2a9268b85b78fe6561a8fb04b6c89db5"
+  }
+}

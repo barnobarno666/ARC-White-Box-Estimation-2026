@@ -1,6 +1,6 @@
-CURRENT SUBMISSION ID: #330088 (https://www.aicrowd.com/challenges/arc-white-box-estimation-challenge-2026/submissions/330088) [Phase 6.5 Finalist P65-03c-L10-p10, local score 2.9784e-08, 8W-0L] | Prev Graded Champion #330018 (official score 4.35e-08, raw MSE 6.82e-08, util 63.73%), #330015 (7.1370e-08), #330016 (7.5121e-08)
-CURRENT BEST LOCAL VALIDATION SCORE: 2.9784e-08 (Phase 6.5 Finalist P65-03c-L10-p10 / estimator_p65_final.py — SUB-3.0e-8 BARRIER BROKEN: 8W-0L CLEAN SWEEP VS INCUMBENT, -36.16% ERROR REDUCTION)
-score to beat: 4.6655e-08 (Phase 6 local diagnostic), 4.35e-08 (Graded #330018), 7.1370e-08 (Live #330015) -> ACHIEVED 2.9784e-08 (Raw MSE 3.7854e-08, Util 78.68%)
+CURRENT SUBMISSION ID: #330160 (https://www.aicrowd.com/challenges/arc-white-box-estimation-challenge-2026/submissions/330160) [Phase 7 Finalist P7-02b-strassen1 / estimator_p7_final.py, official score 2.5335e-08] | Prev Graded #330088, #330018 (official score 4.35e-08, raw MSE 6.82e-08, util 63.73%), #330015 (7.1370e-08), #330016 (7.5121e-08)
+CURRENT BEST LOCAL VALIDATION SCORE: 2.6337e-08 (Phase 7 Finalist P7-02b-strassen1 / estimator_p7_final.py — 8W-0L CLEAN SWEEP VS CONTROL65, -11.57% SCORE REDUCTION, UTILIZATION 69.58%)
+score to beat: 2.9784e-08 (Phase 6.5 finalist CONTROL65) -> ACHIEVED 2.6337e-08 (Raw MSE 3.7853e-08, Util 69.58%, -11.57% adjusted score reduction; Official Score 2.5335e-08)
 
 
 
@@ -139,3 +139,59 @@ score to beat: 4.6655e-08 (Phase 6 local diagnostic), 4.35e-08 (Graded #330018),
 | P65-09-L13-m05 | Final neighbor: perturb last event L13 retention to 0.75 | 4.1162e-08 | 0.7520 (75.20%) | 3.0953e-08 | 1.8086s | 0 (diag) | 0W - 8L vs Best Parent | REJECT (Ratio: 1.0392) |
 | P65-09-L13-p05 | Final neighbor: perturb last event L13 retention to 0.85 | 3.9828e-08 | 0.7638 (76.38%) | 3.0419e-08 | 2.0463s | 0 (diag) | 1W - 7L vs Best Parent | REJECT (Ratio: 1.0213) |
 | **P65-10-unrelaxed** | Finalist official unrelaxed run (`estimator_p65_final.py`) | **3.7854e-08** | **0.7868 (78.68%)** | **2.9784e-08** | 1.6429s | 8 (local teardown) | **8W - 0L vs Incumbent** | **PHASE 6.5 FINALIST VERIFIED (Packaged archive: submission_phase65.tar.gz)** |
+
+## Phase 7 (1024x16, Budget 2^41) Validation Results (Fixed 8-MLP Panel)
+
+| Method / Variant | Short Description | Raw Final MSE | Mean Score Mult | Adjusted Score | Max Residual Time | Failures | Wins vs Baseline | Decision |
+|---|---|---|---|---|---|---|---|---|
+| **P7-12-strassen-q13e05** | Full Strassen1 + Corrected diagonal Q (start=13, eta=0.5) | **3.7854e-08** | **0.6958 (69.58%)** | **2.6338e-08** | 5.3081s | 0 | **8W-0L** | **QUALIFIED** |
+| **P7-11a-Extrapolation** | Paired-resolution extrapolation screen (c6n/c8n, k32/k64) | **N/A** | **N/A** | **N/A** | 0.0000s | 0 | **N/A** | **SKIPPED_GATE (FLOP budget overflow or MSE ~1e-6)** |
+| **P7-11b-Edgeworth** | Bounded terminal Edgeworth screen on finalist regime | **3.7853e-08** | **0.6958 (69.58%)** | **2.6337e-08** | 0.0000s | 0 | **0W-8L** | **SKIPPED_GATE (Delta < 1e-12, gain < 1% gate)** |
+| **P7-10-lin-N1024-a05** | Linear residual control N=1024, alpha=0.05 | **4.5004e-08** | **0.8025 (80.25%)** | **3.6114e-08** | 1.8107s | 0 | **0W-8L** | **EVALUATED** |
+| **P7-10-quad-N1024-a05** | Quadratic residual control N=1024, alpha=0.05 | **3.9749e-08** | **0.8025 (80.25%)** | **3.1898e-08** | 1.9350s | 0 | **0W-8L** | **EVALUATED** |
+| **P7-08-q11e05** | Corrected diagonal Q extension (start=11, eta=0.5) | **3.7863e-08** | **0.7868 (78.68%)** | **2.9792e-08** | 1.9116s | 0 | **2W-6L** | **EVALUATED** |
+| **P7-08-q13e10** | Corrected diagonal Q extension (start=13, eta=1.0) | **3.7861e-08** | **0.7868 (78.68%)** | **2.9791e-08** | 1.8160s | 0 | **3W-5L** | **EVALUATED** |
+| **P7-08-q13e05** | Corrected diagonal Q extension (start=13, eta=0.5) | **3.7859e-08** | **0.7868 (78.68%)** | **2.9789e-08** | 2.1832s | 0 | **3W-5L** | **EVALUATED** |
+| **P7-07-tail-c6n-h05** | Cap 6n, randomized atom-tail sampling at L10 (head=50%) | **4.7594e-07** | **0.4811 (48.11%)** | **2.2899e-07** | 2.1253s | 0 | **0W-8L** | **EVALUATED** |
+| **P7-07-tail-c8n-h05** | Cap 8n, randomized atom-tail sampling at L10 (head=50%) | **2.3592e-07** | **0.5477 (54.77%)** | **1.2922e-07** | 2.0003s | 0 | **0W-8L** | **EVALUATED** |
+| **P7-06b-onetime-k64** | One-time Tucker rank 64 at layer 10 with exact slice restoration | **3.0091e+00** | **0.5285 (52.85%)** | **1.5903e+00** | 1.4867s | 0 | **0W-8L** | **EVALUATED** |
+| **P7-06b-recur-k32-s3** | Recurring DS + Tucker rank 32, start layer 3, h=0 | **3.5880e-06** | **0.1426 (14.26%)** | **5.1155e-07** | 1.0554s | 0 | **0W-8L** | **EVALUATED** |
+| **P7-06b-recur-k64-s3** | Recurring DS + Tucker rank 64, start layer 3, h=0 | **3.5996e-06** | **0.1707 (17.07%)** | **6.1445e-07** | 1.0897s | 0 | **0W-8L** | **EVALUATED** |
+| **P7-06b-recur-k64-s7** | Recurring DS + Tucker rank 64, start layer 7, h=0 | **2.4042e-04** | **0.3117 (31.17%)** | **7.4946e-05** | 1.5256s | 0 | **0W-8L** | **EVALUATED** |
+| **P7-05b-reset-p2-s3** | Preactivation reset period=2, start=3 (rank 2n post-reset) | **3.7859e-08** | **0.7868 (78.68%)** | **2.9788e-08** | 1.6605s | 0 | **4W-4L** | **EVALUATED** |
+| **P7-05a-ds-h1-s3** | Fixed-memory DS summary closure (h=1 cohorts kept, start=3) | **1.1780e+06** | **0.2164 (21.64%)** | **2.5491e+05** | 0.9327s | 0 | **0W-8L** | **EVALUATED** |
+| **P7-05a-ds-h0-s3** | Fixed-memory DS summary closure (h=0 cohorts kept, start=3) | **3.5209e-06** | **0.1265 (12.65%)** | **4.4533e-07** | 0.8638s | 0 | **0W-8L** | **EVALUATED** |
+| **P7-04-reweight-c6n-r1e3** | Cap 6n, signed group reweighting at L10 (G=32, lam=1e-3) | **3.1940e-07** | **0.4890 (48.90%)** | **1.5619e-07** | 1.5640s | 0 | **0W-8L** | **EVALUATED** |
+| **P7-04-reweight-c8n-r1e3** | Cap 8n, signed group reweighting at L10 (G=32, lam=1e-3) | **1.5966e-07** | **0.5576 (55.76%)** | **8.9026e-08** | 1.6983s | 0 | **0W-8L** | **EVALUATED** |
+| **P7-03-normexact-c4n** | Cap 4n (4096 cols) with norm_exact selector at [6, 10, 13] | **6.6153e-07** | **0.4144 (41.44%)** | **2.7417e-07** | 1.6168s | 0 | **0W-8L** | **EVALUATED** |
+| **P7-03-normexact-c6n** | Cap 6n (6144 cols) with norm_exact selector at [6, 10, 13] | **3.3026e-07** | **0.4810 (48.10%)** | **1.5887e-07** | 1.4523s | 0 | **0W-8L** | **EVALUATED** |
+| **P7-03-exactpairs-c8n** | Cap 8n (8192 cols) with exact_pairs selector at [6, 10, 13] | **1.9891e-07** | **0.5477 (54.77%)** | **1.0895e-07** | 1.6668s | 0 | **0W-8L** | **EVALUATED** |
+| **P7-03-normupper-c8n** | Cap 8n (8192 cols) with norm_upper selector at [6, 10, 13] | **1.7806e-07** | **0.5475 (54.75%)** | **9.7481e-08** | 1.3598s | 0 | **0W-8L** | **EVALUATED** |
+| **P7-03-normexact-c8n** | Cap 8n (8192 cols) with norm_exact selector at [6, 10, 13] | **1.6907e-07** | **0.5476 (54.76%)** | **9.2588e-08** | 2.5548s | 0 | **0W-8L** | **EVALUATED** |
+| **P7-02b-strassen1** | 1-Level Strassen on dimensions >= 512 (8-MLP Full) | **3.7853e-08** | **0.6958 (69.58%)** | **2.6337e-08** | 4.2869s | 0 | **8W-0L** | **STRASSEN EVALUATED (-11.57% score reduction, 8W-0L clean sweep)** |
+| **P7-02b-strassen1-full** | Full Strassen on factor transport + repeated slices (>=512) | **3.8017e-08** | **0.6958 (69.58%)** | **2.6451e-08** | 3.9393s | 0 (diag) | **1W-0L vs CONTROL** | **NEW PHASE 7 FINALIST (-11.57% compute, >200B FLOPs saved)** |
+| **P7-02b-strassen1-trans**| Strassen on factor transport only (>=512) | **3.8026e-08** | **0.7439 (74.39%)** | **2.8287e-08** | 2.9602s | 0 (diag) | **1W-0L vs CONTROL** | **STRASSEN GATE PASSED (-5.46% compute, 94.4B FLOPs saved)** |
+| **P7-02a-combined** | Combined exact structured transport + reuse | **3.7854e-08** | **0.7868 (78.68%)** | **2.9784e-08** | 2.0857s | 0 | **0W-0L** | **PARITY** |
+| **P7-02a-reuse** | Exact profile-identified operation reuse | **3.7854e-08** | **0.7868 (78.68%)** | **2.9784e-08** | 2.3088s | 0 | **1W-0L** | **PARITY** |
+| **P7-09-Covariance** | Covariance gate audit (5.34% < 10%) | **0.0000e+00** | **0.0000 (0.00%)** | **0.0000e+00** | 0.0000s | 0 | **N/A** | **SKIPPED_GATE (<10% cost)** |
+| **P7-02a-struc** | Exact structured newborn descriptors (A2, h, A_ds) | **3.7854e-08** | **0.7868 (78.68%)** | **2.9784e-08** | 2.3906s | 0 | **0W-0L** | **PARITY** |
+| **CONTROL65 Baseline** | Frozen Phase 6.5 Finalist (estimator_p65_final.py) anchor | **3.7854e-08** | **0.7868 (78.68%)** | **2.9784e-08** | 1.6429s | 8 | **Benchmark (8T)** | **FROZEN CONTROL (b06d91bc)** |
+
+## Phase 8 (1024x16, Budget 2^41) Validation Results (Fixed 8-MLP Panel)
+
+| Method / Variant | Short Description | Raw Final MSE | Mean Score Mult | Adjusted Score | Max Residual Time | Failures | Wins vs CONTROL7 | Decision |
+|---|---|---|---|---|---|---|---|---|
+| **P8-00-ctrl7-smoke1** | P8-00-ctrl7-smoke1 | **3.8017e-08** | **0.6958 (69.58%)** | **2.6451e-08** | 3.3675s | 1 | **0W-0L vs CONTROL7** | **EVALUATED** |
+| **A1-G-K2** | Gaussian input, incoming K3 slices zero, scalar K4 off | **4.1257e-06** | **0.1000 (10.00%)** | **4.1257e-07** | 1.6222s | 0 | **0W-8L vs CONTROL7** | **EVALUATED** |
+| **A1-A-K2** | Angular input, incoming K3 slices zero, scalar K4 off | **3.4236e-06** | **0.1000 (10.00%)** | **3.4236e-07** | 0.5360s | 0 | **0W-8L vs CONTROL7** | **EVALUATED** |
+| **A1-G-K2K4** | Gaussian input, incoming K3 zero, scalar K4 on (initial c4=0) | **4.0639e-06** | **0.1000 (10.00%)** | **4.0639e-07** | 0.6068s | 0 | **0W-8L vs CONTROL7** | **EVALUATED** |
+| **A1-A-K2K4** | Angular input, incoming K3 zero, scalar K4 on (initial c4=-6/(n+2)) | **3.4303e-06** | **0.1000 (10.00%)** | **3.4303e-07** | 1.1005s | 0 | **0W-8L vs CONTROL7** | **EVALUATED** |
+| **A1-G-K3C65** | Gaussian input, CONTROL65 retention/schedule, scalar K4 on | **3.7859e-08** | **0.7868 (78.68%)** | **2.9788e-08** | 1.8241s | 0 | **0W-8L vs CONTROL7** | **EVALUATED** |
+| **A1-A-K3C65** | Angular input, CONTROL65 retention/schedule, scalar K4 on | **3.4859e-08** | **0.7868 (78.68%)** | **2.7429e-08** | 1.7239s | 0 | **2W-6L vs CONTROL7** | **EVALUATED** |
+| **D1-TERM** | Terminal direct-source contraction from frozen A1-G-K2K4 pilot | **3.8288e-06** | **0.1164 (11.64%)** | **4.4577e-07** | 0.8051s | 0 | **0W-8L vs CONTROL7** | **EVALUATED** |
+| **D1-TERM-A** | D1-TERM-A | **3.2211e-06** | **0.1164 (11.64%)** | **3.7502e-07** | 1.1539s | 0 | **0W-8L vs CONTROL7** | **EVALUATED** |
+| **P8-X-strassen-angular-smoke1** | P8-X-strassen-angular-smoke1 | **9.4348e-01** | **0.1000 (10.00%)** | **9.4348e-01** | 0.0000s | 1 | **0W-0L vs CONTROL7** | **EVALUATED** |
+| **P8-X-smoke2** | P8-X-smoke2 | **3.5131e-08** | **0.6958 (69.58%)** | **2.4443e-08** | 3.1102s | 0 | **0W-0L vs CONTROL7** | **EVALUATED** |
+| **X-STRASSEN-ANGULAR** | X-STRASSEN-ANGULAR | **3.4860e-08** | **0.6958 (69.58%)** | **2.4255e-08** | 3.4167s | 0 | **8W-0L vs CONTROL7** | **EVALUATED** |
+| **CONTROL7-CONF12** | CONTROL7-CONF12 | **3.8505e-08** | **0.6958 (69.58%)** | **2.6790e-08** | 4.1179s | 0 | **0W-0L vs CONTROL7-CONF12** | **EVALUATED** |
+| **FINAL8-CONF12** | FINAL8-CONF12 | **3.5630e-08** | **0.6958 (69.58%)** | **2.4790e-08** | 2.9928s | 0 | **11W-1L vs CONTROL7-CONF12** | **CONFIRMED** |
